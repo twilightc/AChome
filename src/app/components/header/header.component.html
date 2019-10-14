@@ -1,0 +1,38 @@
+<div class="header">
+  <div class="headertitle">
+    <a class="headeranchor" [routerLink]="['/merchandiseregion']">AChome</a>
+  </div>
+  <div class="headerbtn">
+    <mat-form-field class="example-form-field">
+      <input
+        matInput
+        type="text"
+        placeholder="Search Item Name.."
+        [(ngModel)]="searchValue"
+      />
+      <button
+        mat-button
+        *ngIf="searchValue"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="searchValue = ''"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+    <button mat-icon-button color="primary">
+      <mat-icon>search</mat-icon>
+    </button>
+
+    <button mat-button (click)="toRegister()" *ngIf="!loginservice.isLoggedIn">
+      Sign Up
+    </button>
+    <button mat-button (click)="openDialog()" *ngIf="!loginservice.isLoggedIn">
+      Sign In
+    </button>
+    <button mat-button (click)="Logout()" *ngIf="this.loginservice.isLoggedIn">
+      Logout
+    </button>
+  </div>
+</div>

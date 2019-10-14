@@ -1,0 +1,14 @@
+<div class="palm ">
+  <ul class="drop-down-menu">
+    <li *ngFor="let item of dummylist; let index = index">
+      <div>{{ item.name }}</div>
+
+      <ul *ngIf="index === 0">
+        <li>電腦</li>
+        <li>電腦周邊</li>
+        <li>零件</li>
+      </ul>
+    </li>
+  </ul>
+</div>
+<div class="filler"></div>

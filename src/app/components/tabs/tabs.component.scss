@@ -1,0 +1,24 @@
+.tab-list {
+  list-style: none;
+  overflow: hidden;
+  padding: 0;
+  color: #000000;
+  margin-bottom: 0px;
+}
+
+.tab-list li {
+  cursor: pointer;
+  float: left;
+  width: 180px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  background-color: #ecf4f5;
+}
+
+.tab-list li:hover {
+  background-color: #edde5d;
+}
+.tab-list li.active {
+  background-color: #fbd475;
+}

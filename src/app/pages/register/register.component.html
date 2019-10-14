@@ -1,0 +1,39 @@
+<div class="register-root">
+  <div class="register-body">
+    <input
+      class="search-input"
+      type="text"
+      placeholder="帳號"
+      [(ngModel)]="Registration.AccountName"
+    />
+    <input
+      class="search-input"
+      type="text"
+      placeholder="密碼"
+      [(ngModel)]="Registration.Password"
+    />
+    <input
+      class="search-input"
+      type="text"
+      placeholder="會員名稱"
+      [(ngModel)]="Registration.UserName"
+    />
+    <input
+      class="search-input"
+      type="text"
+      placeholder="電子信箱"
+      [(ngModel)]="Registration.Email"
+    />
+    <input
+      class="search-input"
+      type="text"
+      placeholder="電話"
+      [(ngModel)]="Registration.PhoneNumber"
+    />
+  </div>
+
+  <div class="register-footer">
+    <button mat-flat-button (click)="openLoginDialog()">已有帳號?登入</button>
+    <button mat-flat-button (click)="register()">註冊</button>
+  </div>
+</div>

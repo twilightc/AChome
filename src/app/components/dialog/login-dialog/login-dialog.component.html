@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>請登入以繼續</h1>
+<div mat-dialog-content>
+  <!-- <p>What's your favorite animal?<p> -->
+
+  <mat-form-field>
+    <input placeholder="帳號" matInput [(ngModel)]="account.Account" />
+  </mat-form-field>
+  <mat-form-field>
+    <input placeholder="密碼" matInput [(ngModel)]="account.Password" />
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">沒帳號顆顆</button>
+  <!-- [mat-dialog-close]="data.animal" -->
+  <button mat-button (click)="login()" cdkFocusInitial>
+    登入
+  </button>
+</div>

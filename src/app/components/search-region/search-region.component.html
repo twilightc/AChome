@@ -1,0 +1,32 @@
+<div class="search-bar">
+  <div>
+    <input
+      type="text"
+      placeholder="輸入搜尋項目"
+      [(ngModel)]="searchName"
+      class="search-input"
+    />
+  </div>
+  <div>
+    <button
+      mat-raised-button
+      style="background-color: #616161;margin-left: 10px"
+    >
+      搜尋
+    </button>
+  </div>
+</div>
+<div class="sort-button">
+  <p style="display: inline-block">排序方式</p>
+  <mat-button-toggle-group #group="matButtonToggleGroup">
+    <mat-button-toggle value="left" aria-label="Text align left">
+      <span>日期</span>
+    </mat-button-toggle>
+    <mat-button-toggle value="center" aria-label="Text align center">
+      <span>銷售數量</span>
+    </mat-button-toggle>
+    <mat-button-toggle value="right" aria-label="Text align right">
+      <span>價格</span>
+    </mat-button-toggle>
+  </mat-button-toggle-group>
+</div>

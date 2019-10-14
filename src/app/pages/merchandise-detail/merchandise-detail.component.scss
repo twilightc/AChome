@@ -1,0 +1,51 @@
+:host {
+  width: 100%;
+  max-width: 1200px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+  align-items: center;
+}
+
+:host div {
+  display: flex;
+}
+
+.detail-body {
+  flex-direction: row;
+}
+
+.price-body {
+  flex-direction: column;
+  padding-left: 30px;
+}
+
+.amount-btn {
+  flex-flow: row nowrap;
+  width: 70%;
+  padding-left: 5px;
+}
+
+.mt20 {
+  margin-top: 20px;
+}
+
+.ml10 {
+  margin-left: 10px;
+}
+
+.item-info {
+  width: 100%;
+  max-width: 1200px;
+  height: 100%;
+  min-height: 300px;
+  background-color: #fbd475;
+  margin-bottom: 0px;
+}
+
+.countbtn {
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  min-width: 36px;
+}

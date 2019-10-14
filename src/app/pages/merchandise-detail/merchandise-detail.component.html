@@ -1,0 +1,47 @@
+<!-- <p>merchandise-detail works!</p> -->
+<div class="detail-body">
+  <div>
+    <img src="https://placem.at/places?h=400&w=400" />
+  </div>
+  <div class="price-body">
+    <p>售價</p>
+    <p>庫存</p>
+    <div style="width: 100%;align-items: center">
+      <span>購買數量:</span>
+      <div class="amount-btn">
+        <button mat-raised-button class="countbtn">-</button>
+        <input type="text" style="width:30%;text-align: center" />
+        <button mat-raised-button class="countbtn">+</button>
+      </div>
+    </div>
+
+    <div class="mt20">
+      <button mat-raised-button style="background-color: #fca21b">
+        <mat-icon>shopping_cart</mat-icon>
+        放入購物車
+      </button>
+      <button class="ml10" mat-raised-button style="background-color: #ec3845">
+        立即結帳
+      </button>
+    </div>
+  </div>
+</div>
+<div style="width: 63%">
+  <app-tabs style="width: 100%">
+    <app-tab tabTitle="商品說明">
+      <div class="item-info">
+        <p>1.年終肉舖團周年慶</p>
+      </div>
+    </app-tab>
+    <app-tab tabTitle="問與答">
+      <div class="item-info">
+        <p>2三個姑娘六隻奶</p>
+      </div>
+    </app-tab>
+    <app-tab tabTitle="購買人次">
+      <div class="item-info">
+        <p>3我全都要</p>
+      </div>
+    </app-tab>
+  </app-tabs>
+</div>
