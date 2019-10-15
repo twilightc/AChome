@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { MerchandiseViewModel } from 'src/app/models/CategoryListViewModel';
 
 @Component({
   selector: 'app-merchandise-region',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./merchandise-region.component.scss']
 })
 export class MerchandiseRegionComponent implements OnInit {
+  @Input() merchandiseList: MerchandiseViewModel[];
+
   constructor() {}
 
   ngOnInit() {}

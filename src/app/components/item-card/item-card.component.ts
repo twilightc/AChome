@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { MerchandiseViewModel } from 'src/app/models/CategoryListViewModel';
 
 @Component({
   selector: 'app-item-card',
@@ -7,9 +8,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./item-card.component.scss']
 })
 export class ItemCardComponent implements OnInit {
+  @Input() merchandise: MerchandiseViewModel;
   constructor(private router: Router) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.merchandise.ImagePath = `http://localhost:50390/img/${this.merchandise.ImagePath}`;
+  }
 
   toDetail() {
     this.router.navigate(['/detail']);

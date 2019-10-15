@@ -6,7 +6,6 @@ $commonColor: #a1a1a1;
 :host {
   border: 1px #a1a1a1 solid;
   width: 200px;
-  height: 425px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -26,4 +25,21 @@ $commonColor: #a1a1a1;
   justify-content: space-between;
   align-items: center;
   @include common-color();
+}
+.image-container {
+  min-height: 200px;
+  max-height: 200px;
+  height: 200px;
+  min-width: 200px;
+  max-width: 200px;
+  width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.product-image {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
 }

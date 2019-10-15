@@ -1,12 +1,12 @@
 <div class="palm ">
   <ul class="drop-down-menu">
-    <li *ngFor="let item of dummylist; let index = index">
-      <div>{{ item.name }}</div>
+    <li *ngFor="let category of CategoryList; let index = index">
+      <div>{{ category.Cname }}</div>
 
-      <ul *ngIf="index === 0">
-        <li>電腦</li>
-        <li>電腦周邊</li>
-        <li>零件</li>
+      <ul>
+        <li *ngFor="let detail of category.Detail; let detailIndex = index">
+          {{ detail.DetailName }}
+        </li>
       </ul>
     </li>
   </ul>
