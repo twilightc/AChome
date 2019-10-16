@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
+import { EventEmitter } from 'protractor';
 
 @Component({
   selector: 'app-search-region',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./search-region.component.scss']
 })
 export class SearchRegionComponent implements OnInit {
+  @Output() search = new EventEmitter();
   searchName = '';
 
   constructor() {}

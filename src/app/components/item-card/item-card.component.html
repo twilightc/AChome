@@ -3,12 +3,14 @@
     <!-- <img src="https://placem.at/places?h=200&w=200" /> -->
     <img class="product-image" [src]="merchandise.ImagePath" />
   </div>
-  <p>{{ merchandise.MerchandiseTitle }}</p>
-  <p>${{ merchandise.Price }}</p>
+  <div>{{ merchandise.MerchandiseTitle }}</div>
+</div>
+<div>
+  <div>${{ merchandise.Price }}</div>
 </div>
 <mat-divider></mat-divider>
 <div class="card-footer">
-  <p>賣出:{{ merchandise.SoldQty }}</p>
+  <div>賣出:{{ merchandise.SoldQty }}</div>
   <button mat-icon-button color="primary" disabledRipple>
     <mat-icon>favorite_border</mat-icon>
   </button>
