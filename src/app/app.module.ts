@@ -21,6 +21,7 @@ import { BillbuttonDirective } from './directives/billbutton.directive';
 import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
 import { LoginDialogComponent } from './components/dialog/login-dialog/login-dialog.component';
+import { PaginatorComponent } from './components/paginator/paginator.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { LoginDialogComponent } from './components/dialog/login-dialog/login-dia
     BillbuttonDirective,
     RegisterComponent,
     LoginComponent,
-    LoginDialogComponent
+    LoginDialogComponent,
+    PaginatorComponent
   ],
   imports: [
     BrowserModule,

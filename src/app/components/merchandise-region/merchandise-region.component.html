@@ -1,3 +1,6 @@
-<ng-container *ngFor="let merchandise of merchandiseList">
-  <app-item-card [merchandise]="merchandise"></app-item-card>
-</ng-container>
+<div class="root">
+  <ng-container *ngFor="let merchandise of merchandiseList; let index = index">
+    <app-item-card [merchandise]="merchandise"></app-item-card>
+  </ng-container>
+</div>
+<app-paginator></app-paginator>

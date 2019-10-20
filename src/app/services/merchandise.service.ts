@@ -14,13 +14,13 @@ export class MerchandiseService {
   constructor(private httpclient: HttpClient) {}
 
   GetCategoryList() {
-    return this.httpclient.get<BaseResponse<CategoryListViewModel>>(
+    return this.httpclient.get<BaseResponse<CategoryListViewModel[]>>(
       `${environment.apiUrl}Merchandise/GetCategoryListAsync`
     );
   }
 
   GetMerchandiseList() {
-    return this.httpclient.get<BaseResponse<MerchandiseViewModel>>(
+    return this.httpclient.get<BaseResponse<MerchandiseViewModel[]>>(
       `${environment.apiUrl}Merchandise/GetMerchandiseList`
     );
   }

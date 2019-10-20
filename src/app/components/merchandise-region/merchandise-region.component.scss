@@ -1,6 +1,12 @@
 :host {
+  // display: flex;
+  // justify-content: space-evenly;
+  // flex-flow: column nowrap;
+  height: 60%;
+}
+
+.root {
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
-  height: 60%;
 }

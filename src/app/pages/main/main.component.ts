@@ -8,7 +8,7 @@ import { MerchandiseViewModel } from 'src/app/models/CategoryListViewModel';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
-  merchandiseList = new MerchandiseViewModel();
+  merchandiseList = new Array<MerchandiseViewModel>();
   constructor(private merchandiseservice: MerchandiseService) {}
 
   ngOnInit() {

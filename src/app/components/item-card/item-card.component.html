@@ -1,7 +1,11 @@
 <div class="card-body" (click)="toDetail()">
   <div class="image-container">
-    <!-- <img src="https://placem.at/places?h=200&w=200" /> -->
-    <img class="product-image" [src]="merchandise.ImagePath" />
+    <ng-container *ngIf="!this.merchandise.ImagePath.includes('.jpg')">
+      <img src="https://placem.at/places?h=200&w=200" />
+    </ng-container>
+    <ng-container *ngIf="this.merchandise.ImagePath.includes('.jpg')">
+      <img class="product-image" [src]="merchandise.ImagePath" />
+    </ng-container>
   </div>
   <div>{{ merchandise.MerchandiseTitle }}</div>
 </div>

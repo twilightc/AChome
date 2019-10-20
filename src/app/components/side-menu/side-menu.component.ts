@@ -8,7 +8,7 @@ import { MerchandiseService } from 'src/app/services/merchandise.service';
   styleUrls: ['./side-menu.component.scss']
 })
 export class SideMenuComponent implements OnInit {
-  CategoryList: CategoryListViewModel;
+  CategoryList: CategoryListViewModel[];
   dummylist = [
     { name: '電腦及周邊產品', number: 1 },
     { name: '手機', number: 2 },
