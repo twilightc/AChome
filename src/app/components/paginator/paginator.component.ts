@@ -1,6 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  Input,
+  Output,
+  EventEmitter
+} from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
-import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-paginator',
@@ -8,13 +14,20 @@ import { MatPaginator } from '@angular/material/paginator';
   styleUrls: ['./paginator.component.scss']
 })
 export class PaginatorComponent implements OnInit {
-  // @ViewChild(MatPaginator,{static:true}) paginator: MatPaginator;
-  length = 100;
+  length = 16;
   pageSize = 10;
+  @Output() pageEvent = new EventEmitter<PageEvent>();
   pageSizeOptions: number[] = [5, 10];
-  pageEvent: PageEvent;
 
   constructor() {}
 
   ngOnInit() {}
+
+  pageChange(pageEvent: PageEvent) {
+    this.pageEvent.emit(pageEvent);
+  }
+
+  // setPageSizeOptions(setPageSizeOptionsInput: string) {
+  //   this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
+  // }
 }

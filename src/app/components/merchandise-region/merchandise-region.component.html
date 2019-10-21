@@ -3,4 +3,4 @@
     <app-item-card [merchandise]="merchandise"></app-item-card>
   </ng-container>
 </div>
-<app-paginator></app-paginator>
+<app-paginator (pageEvent)="pageChange($event)"></app-paginator>

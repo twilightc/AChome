@@ -2,5 +2,6 @@
   <app-search-region></app-search-region>
   <app-merchandise-region
     [merchandiseList]="merchandiseList"
+    (pageEvent)="pageChange($event)"
   ></app-merchandise-region>
 </app-sidebar-scaffold>

@@ -19,9 +19,9 @@ export class MerchandiseService {
     );
   }
 
-  GetMerchandiseList() {
+  GetMerchandiseList(pageIndex: number, pageSize: number) {
     return this.httpclient.get<BaseResponse<MerchandiseViewModel[]>>(
-      `${environment.apiUrl}Merchandise/GetMerchandiseList`
+      `${environment.apiUrl}Merchandise/GetMerchandiseList?pageIndex=${pageIndex}&pageSize=${pageSize}`
     );
   }
 }
