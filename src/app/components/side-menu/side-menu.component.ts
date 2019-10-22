@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { CategoryListViewModel } from 'src/app/models/CategoryListViewModel';
+import {
+  CategoryListViewModel,
+  CategoryListDetailViewModel
+} from 'src/app/models/CategoryListViewModel';
 import { MerchandiseService } from 'src/app/services/merchandise.service';
 
 @Component({
@@ -9,20 +12,23 @@ import { MerchandiseService } from 'src/app/services/merchandise.service';
 })
 export class SideMenuComponent implements OnInit {
   CategoryList: CategoryListViewModel[];
-  dummylist = [
-    { name: '電腦及周邊產品', number: 1 },
-    { name: '手機', number: 2 },
-    { name: '家電及影音產品', number: 3 },
-    { name: '相機、攝影機', number: 4 },
-    { name: '生活用品', number: 4 }
-  ];
+
   constructor(private merchandiseservice: MerchandiseService) {}
 
   ngOnInit() {
     this.merchandiseservice.GetCategoryList().subscribe(response => {
-      // console.log(response.Data);
+      console.log(response.Data);
 
       this.CategoryList = response.Data;
     });
   }
+
+  // showCategoryItems(Cid: string, detail: CategoryListDetailViewModel) {
+  //   this.merchandiseservice
+  //     .GetCategoryDetailItems(Cid, detail.DetailId)
+  //     .subscribe(response => {
+  //       console.log(response);
+  //       this.merchandiseservice.merchandiseList = response.Data;
+  //     });
+  // }
 }

@@ -1,5 +1,8 @@
 <app-sidebar-scaffold>
-  <app-search-region></app-search-region>
+  <app-search-region
+    [merchandiseList]="merchandiseList"
+    (RenewListBySearching)="RenewListBySearching($event)"
+  ></app-search-region>
   <app-merchandise-region
     [merchandiseList]="merchandiseList"
     (pageEvent)="pageChange($event)"

@@ -2,7 +2,7 @@ export class CategoryListViewModel {
   Cid: string;
   Cname: string;
   GroupSeq: number;
-  Detail: Array<CategoryListDetailViewModel>;
+  Detail: CategoryListDetailViewModel[];
 }
 
 export class CategoryListDetailViewModel {

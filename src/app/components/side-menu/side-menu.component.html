@@ -5,7 +5,17 @@
 
       <ul>
         <li *ngFor="let detail of category.Detail; let detailIndex = index">
-          {{ detail.DetailName }}
+          <div class="detail">
+            <a
+              [routerLink]="[
+                '/main',
+                { Cid: category.Cid, DetailId: detail.DetailId }
+              ]"
+              style="color:#000000; text-decoration: none;"
+            >
+              {{ detail.DetailName }}
+            </a>
+          </div>
         </li>
       </ul>
     </li>

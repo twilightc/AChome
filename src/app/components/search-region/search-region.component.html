@@ -11,6 +11,7 @@
     <button
       mat-raised-button
       style="background-color: #616161;margin-left: 10px"
+      (click)="Search()"
     >
       搜尋
     </button>
@@ -22,11 +23,19 @@
     <mat-button-toggle value="left" aria-label="Text align left">
       <span>日期</span>
     </mat-button-toggle>
-    <mat-button-toggle value="center" aria-label="Text align center">
-      <span>銷售數量</span>
-    </mat-button-toggle>
-    <mat-button-toggle value="right" aria-label="Text align right">
+    <mat-button-toggle
+      value="right"
+      aria-label="Text align right"
+      (click)="SortByPrice()"
+    >
       <span>價格</span>
+    </mat-button-toggle>
+    <mat-button-toggle
+      value="center"
+      aria-label="Text align center"
+      (click)="SortBySoldQty()"
+    >
+      <span>銷售數量</span>
     </mat-button-toggle>
   </mat-button-toggle-group>
 </div>

@@ -87,3 +87,18 @@ $itemColor: #fff3de;
   flex-direction: column;
   flex-grow: 1;
 }
+
+.detail {
+  position: relative;
+  width: 88px;
+  height: 50px;
+}
+
+.detail a {
+  position: absolute;
+  text-align: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
