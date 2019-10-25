@@ -29,17 +29,6 @@ export class MerchandiseService {
     );
   }
 
-  // GetMerchandiseList(
-  //   pageIndex: number,
-  //   pageSize: number,
-  //   cid: string,
-  //   detailId: string
-  // ) {
-  //   return this.httpclient.get<BaseResponse<MerchandiseWrapper>>(
-  //     `${environment.apiUrl}Merchandise/GetMerchandiseList?pageIndex=${pageIndex}&pageSize=${pageSize}&categoryId=${cid}&detailId=${detailId}`
-  //   );
-  // }
-
   GetMerchandiseListBySearchingName(searchName: string) {
     return this.httpclient.get<BaseResponse<MerchandiseViewModel[]>>(
       `${environment.apiUrl}Merchandise/GetMerchandiseListBySearching?name=${searchName}`

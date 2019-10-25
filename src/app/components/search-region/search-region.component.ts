@@ -38,10 +38,7 @@ export class SearchRegionComponent implements OnInit {
   }
 
   Search() {
-    // console.log('this.searchName:', this.searchName);
-    // console.log('this.sortType:', this.sortType);
     const searchEvent = new SearchEvent(this.searchName, this.sortType);
-    console.log('searchEvent:', searchEvent);
 
     this.RenewListBySearching.emit(searchEvent);
   }

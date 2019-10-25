@@ -8,7 +8,10 @@
     </ng-container>
   </div>
   <div style="padding: 5px">
-    <a [routerLink]="['/detail']" style="color:#000000; text-decoration: none;">
+    <a
+      [routerLink]="['/detail', { ItemId: merchandise.MerchandiseId }]"
+      style="color:#000000; text-decoration: none;"
+    >
       {{ merchandise.MerchandiseTitle }}
     </a>
   </div>
