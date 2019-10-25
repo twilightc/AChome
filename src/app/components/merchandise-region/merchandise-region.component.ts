@@ -1,12 +1,5 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  ViewChild,
-  Output,
-  EventEmitter
-} from '@angular/core';
-import { MerchandiseViewModel } from 'src/app/models/CategoryListViewModel';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { MerchandiseWrapper } from 'src/app/models/CategoryListViewModel';
 import { PageEvent } from '@angular/material/paginator';
 
 @Component({
@@ -15,7 +8,8 @@ import { PageEvent } from '@angular/material/paginator';
   styleUrls: ['./merchandise-region.component.scss']
 })
 export class MerchandiseRegionComponent implements OnInit {
-  @Input() merchandiseList: MerchandiseViewModel[];
+  @Input() merchandiseWrapper: MerchandiseWrapper;
+  @Input() currentPageIndex: number;
   @Output() pageEvent = new EventEmitter<PageEvent>();
 
   constructor() {}

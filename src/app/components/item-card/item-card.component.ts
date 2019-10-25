@@ -14,8 +14,4 @@ export class ItemCardComponent implements OnInit {
   ngOnInit() {
     this.merchandise.ImagePath = `http://localhost:50390/img/${this.merchandise.ImagePath}`;
   }
-
-  toDetail() {
-    this.router.navigate(['/detail']);
-  }
 }

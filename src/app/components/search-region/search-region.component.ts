@@ -8,6 +8,8 @@ import {
 } from '@angular/core';
 import { MerchandiseViewModel } from 'src/app/models/CategoryListViewModel';
 import { MerchandiseService } from 'src/app/services/merchandise.service';
+import { SortTypeEnum } from 'src/app/models/SearchRequestModel';
+import { SearchEvent } from 'src/app/models/EventModels';
 
 @Component({
   selector: 'app-search-region',
@@ -16,30 +18,31 @@ import { MerchandiseService } from 'src/app/services/merchandise.service';
 })
 export class SearchRegionComponent implements OnInit {
   searchName = '';
+  sortType = SortTypeEnum.None;
   @Input() merchandiseList = new Array<MerchandiseViewModel>();
-  @Output() RenewListBySearching = new EventEmitter<string>();
+  @Output() RenewListBySearching = new EventEmitter<SearchEvent>();
+  @Output() Sort = new EventEmitter<number>();
 
   constructor() {}
 
   ngOnInit() {}
 
   SortByPrice() {
-    this.merchandiseList = this.merchandiseList.sort(
-      (a: MerchandiseViewModel, b: MerchandiseViewModel): number => {
-        return a.Price === b.Price ? 0 : a.Price > b.Price ? 1 : -1;
-      }
-    );
+    this.sortType = SortTypeEnum.Price;
+    this.Search();
   }
 
   SortBySoldQty() {
-    this.merchandiseList = this.merchandiseList.sort(
-      (a: MerchandiseViewModel, b: MerchandiseViewModel): number => {
-        return a.SoldQty === b.SoldQty ? 0 : a.SoldQty > b.SoldQty ? 1 : -1;
-      }
-    );
+    this.sortType = SortTypeEnum.SoldQty;
+    this.Search();
   }
 
   Search() {
-    this.RenewListBySearching.emit(this.searchName);
+    // console.log('this.searchName:', this.searchName);
+    // console.log('this.sortType:', this.sortType);
+    const searchEvent = new SearchEvent(this.searchName, this.sortType);
+    console.log('searchEvent:', searchEvent);
+
+    this.RenewListBySearching.emit(searchEvent);
   }
 }

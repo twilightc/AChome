@@ -17,7 +17,7 @@ export class SideMenuComponent implements OnInit {
 
   ngOnInit() {
     this.merchandiseservice.GetCategoryList().subscribe(response => {
-      console.log(response.Data);
+      // console.log(response.Data);
 
       this.CategoryList = response.Data;
     });

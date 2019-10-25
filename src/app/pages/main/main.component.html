@@ -1,10 +1,11 @@
 <app-sidebar-scaffold>
   <app-search-region
-    [merchandiseList]="merchandiseList"
+    [merchandiseList]="merchandiseWrapper.MerchandiseViewModel"
     (RenewListBySearching)="RenewListBySearching($event)"
   ></app-search-region>
   <app-merchandise-region
-    [merchandiseList]="merchandiseList"
+    [currentPageIndex]="searchRequestModel.PageIndex"
+    [merchandiseWrapper]="merchandiseWrapper"
     (pageEvent)="pageChange($event)"
   ></app-merchandise-region>
 </app-sidebar-scaffold>

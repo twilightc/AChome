@@ -11,6 +11,11 @@ export class CategoryListDetailViewModel {
   Seq: number;
 }
 
+export class MerchandiseWrapper {
+  MerchandiseViewModel: MerchandiseViewModel[];
+  MerchandiseAmount: number;
+}
+
 export class MerchandiseViewModel {
   MerchandiseId: string;
   OwnerAccount: string;

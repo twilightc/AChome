@@ -1,6 +1,15 @@
 <div class="root">
-  <ng-container *ngFor="let merchandise of merchandiseList; let index = index">
+  <ng-container
+    *ngFor="
+      let merchandise of merchandiseWrapper.MerchandiseViewModel;
+      let index = index
+    "
+  >
     <app-item-card [merchandise]="merchandise"></app-item-card>
   </ng-container>
 </div>
-<app-paginator (pageEvent)="pageChange($event)"></app-paginator>
+<app-paginator
+  [currentPageIndex]="currentPageIndex"
+  [length]="merchandiseWrapper.MerchandiseAmount"
+  (pageEvent)="pageChange($event)"
+></app-paginator>

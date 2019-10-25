@@ -14,9 +14,10 @@ import { PageEvent } from '@angular/material/paginator';
   styleUrls: ['./paginator.component.scss']
 })
 export class PaginatorComponent implements OnInit {
-  length = 16;
-  pageSize = 10;
+  @Input() length: number;
+  @Input() currentPageIndex: number;
   @Output() pageEvent = new EventEmitter<PageEvent>();
+  pageSize = 10;
   pageSizeOptions: number[] = [5, 10];
 
   constructor() {}
@@ -26,8 +27,4 @@ export class PaginatorComponent implements OnInit {
   pageChange(pageEvent: PageEvent) {
     this.pageEvent.emit(pageEvent);
   }
-
-  // setPageSizeOptions(setPageSizeOptionsInput: string) {
-  //   this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
-  // }
 }

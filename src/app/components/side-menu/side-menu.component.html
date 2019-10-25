@@ -1,11 +1,18 @@
 <div class="palm ">
   <ul class="drop-down-menu">
     <li *ngFor="let category of CategoryList; let index = index">
-      <div>{{ category.Cname }}</div>
+      <div class="category-link">
+        <a
+          [routerLink]="['/main', { Cid: category.Cid }]"
+          style="color:#000000; text-decoration: none;"
+        >
+          {{ category.Cname }}
+        </a>
+      </div>
 
       <ul>
         <li *ngFor="let detail of category.Detail; let detailIndex = index">
-          <div class="detail">
+          <div class="category-link">
             <a
               [routerLink]="[
                 '/main',

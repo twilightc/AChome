@@ -1,10 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MerchandiseService } from 'src/app/services/merchandise.service';
-import { MerchandiseViewModel } from 'src/app/models/CategoryListViewModel';
+import {
+  MerchandiseViewModel,
+  MerchandiseWrapper
+} from 'src/app/models/CategoryListViewModel';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import {
+  SearchRequestModel,
+  SortTypeEnum
+} from 'src/app/models/SearchRequestModel';
+import { SearchEvent } from 'src/app/models/EventModels';
 
 @Component({
   selector: 'app-main',
@@ -13,63 +21,86 @@ import { switchMap } from 'rxjs/operators';
 })
 export class MainComponent implements OnInit {
   paginator: MatPaginator;
-  merchandiseList = new Array<MerchandiseViewModel>();
+  merchandiseWrapper = new MerchandiseWrapper();
+  searchRequestModel = new SearchRequestModel();
 
   constructor(
     private merchandiseservice: MerchandiseService,
-    private activateroute: ActivatedRoute
+    private activateroute: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit() {
+    this.searchRequestModel.PageIndex = 1;
+    this.searchRequestModel.PageSize = 10;
     this.activateroute.paramMap
       .pipe(
-        switchMap(params => of([params.get('Cid'), params.get('DetailId')]))
+        switchMap(params =>
+          of([
+            params.get('Cid'),
+            params.get('DetailId'),
+            params.get('SortType'),
+            params.get('Keyword')
+          ])
+        )
       )
       .subscribe(data => {
-        console.log(data);
-        if (data[0] !== null && data[1] !== null) {
-          this.getCategoryDetailItems(data);
-        } else {
-          this.getMerchandises(0, 10);
-        }
+        this.searchRequestModel.CategoryId = data[0];
+        this.searchRequestModel.CategoryDetailId = data[1];
+        this.searchRequestModel.SortType = parseInt(data[2], 10);
+        this.searchRequestModel.Keyword = data[3];
+        this.searchRequestModel.PageIndex = 1;
+        this.getMerchandises();
       });
   }
 
   pageChange(pageEvent: PageEvent) {
-    this.getMerchandises(pageEvent.pageIndex, pageEvent.pageSize);
+    // console.log(pageEvent);
+    this.searchRequestModel.PageIndex = pageEvent.pageIndex + 1;
+    this.searchRequestModel.PageSize = pageEvent.pageSize;
+    this.getMerchandises();
   }
 
-  getCategoryDetailItems(dataFromCategory: string[]) {
-    this.merchandiseservice
-      .GetCategoryDetailItems(dataFromCategory[0], dataFromCategory[1])
-      .subscribe(response => {
-        console.log('dataIncategory:', response.Data);
+  getMerchandises() {
+    // console.log('this.searchRequestModel:', this.searchRequestModel);
 
-        this.merchandiseservice.merchandiseList = response.Data;
-        this.merchandiseList = this.merchandiseservice.merchandiseList;
-      });
-  }
-
-  getMerchandises(pageIndex, pageSize) {
     this.merchandiseservice
-      .GetMerchandiseList(pageIndex, pageSize)
+      .GetMerchandiseListBySearching(this.searchRequestModel)
       .subscribe(response => {
         // console.log(response.Data);
-        this.merchandiseservice.merchandiseList = response.Data;
-        this.merchandiseList = this.merchandiseservice.merchandiseList;
+        this.merchandiseWrapper = response.Data;
       });
   }
 
-  RenewListBySearching(searchName: string) {
-    if (searchName.length !== 0) {
-      this.merchandiseservice
-        .GetMerchandiseListBySearching(searchName)
-        .subscribe(response => {
-          this.merchandiseservice.merchandiseList = response.Data;
-          this.merchandiseList = this.merchandiseservice.merchandiseList;
-        });
-    } else {
-      this.getMerchandises(0, 10);
-    }
+  RenewListBySearching(searchEvent: SearchEvent) {
+    this.router.navigate([
+      'main',
+      {
+        ...(this.searchRequestModel.CategoryId && {
+          Cid: this.searchRequestModel.CategoryId
+        }),
+        ...(this.searchRequestModel.CategoryDetailId && {
+          DetailId: this.searchRequestModel.CategoryDetailId
+        }),
+        ...(searchEvent.searchName && {
+          Keyword: searchEvent.searchName
+        }),
+        ...(searchEvent.sortType !== SortTypeEnum.None && {
+          SortType: searchEvent.sortType
+        })
+      }
+    ]);
   }
+
+  // RenewListBySorting(sortingType: SortTypeEnum) {
+  //   console.log('sortingType:', sortingType);
+
+  //   this.router.navigate([
+  //     'main',
+  //     {
+  //       Cid: this.searchRequestModel.CategoryId,
+  //       DetailId: this.searchRequestModel.CategoryDetailId
+  //     }
+  //   ]);
+  // }
 }

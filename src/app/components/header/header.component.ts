@@ -60,9 +60,7 @@ export class HeaderComponent implements AfterViewInit, OnInit {
     public dialog: MatDialog
   ) {}
 
-  ngOnInit() {
-    console.log(this.loginservice.isLoggedIn);
-  }
+  ngOnInit() {}
 
   @HostBinding('@toggle')
   get toggle(): VisibilityState {
