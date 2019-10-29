@@ -3,6 +3,7 @@ import { MerchandiseViewModel } from 'src/app/models/CategoryListViewModel';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { MerchandiseService } from 'src/app/services/merchandise.service';
 
 @Component({
   selector: 'app-merchandise-detail',
@@ -11,13 +12,21 @@ import { of } from 'rxjs';
 })
 export class MerchandiseDetailComponent implements OnInit {
   merchandise: MerchandiseViewModel;
-  constructor(private activateroute: ActivatedRoute) {}
+  purchasingQty = 0;
+  constructor(
+    private activateroute: ActivatedRoute,
+    private merchandiseservice: MerchandiseService
+  ) {}
 
   ngOnInit() {
     this.activateroute.paramMap
-      .pipe(switchMap(params => of([params.get('Cid')])))
+      .pipe(switchMap(params => of([params.get('ItemId')])))
       .subscribe(data => {
-        this.merchandise.MerchandiseId = data[0];
+        this.merchandiseservice.GetMerchandise(data[0]).subscribe(response => {
+          console.log(response.Data);
+          this.merchandise = response.Data;
+          this.merchandise.ImagePath = `http://localhost:50390/img/${this.merchandise.ImagePath}`;
+        });
       });
   }
 }

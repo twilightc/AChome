@@ -20,9 +20,9 @@ $itemColor: #b2ebf2;
 }
 
 .sort-button {
-  flex-flow: row wrap;
+  flex-flow: row nowrap;
   justify-content: space-evenly;
-  width: 53%;
+  width: 70%;
 }
 
 .search-bar {
@@ -33,4 +33,13 @@ $itemColor: #b2ebf2;
   border: none;
   background-color: #ffffff;
   padding-left: 10px;
+}
+
+.btn-region {
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.order-button {
+  width: 30%;
 }

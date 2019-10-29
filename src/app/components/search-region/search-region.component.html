@@ -17,25 +17,45 @@
     </button>
   </div>
 </div>
-<div class="sort-button">
-  <p style="display: inline-block">排序方式</p>
-  <mat-button-toggle-group #group="matButtonToggleGroup">
-    <mat-button-toggle value="left" aria-label="Text align left">
-      <span>日期</span>
-    </mat-button-toggle>
-    <mat-button-toggle
-      value="right"
-      aria-label="Text align right"
-      (click)="SortByPrice()"
-    >
-      <span>價格</span>
-    </mat-button-toggle>
-    <mat-button-toggle
-      value="center"
-      aria-label="Text align center"
-      (click)="SortBySoldQty()"
-    >
-      <span>銷售數量</span>
-    </mat-button-toggle>
-  </mat-button-toggle-group>
+<div class="btn-region">
+  <div class="sort-button">
+    <p style="display: inline-block">排序方式</p>
+    <mat-button-toggle-group #group="matButtonToggleGroup">
+      <mat-button-toggle value="left" aria-label="Text align left">
+        <span>日期</span>
+      </mat-button-toggle>
+      <mat-button-toggle
+        value="right"
+        aria-label="Text align right"
+        (click)="SortBy(SortTypeEnum.Price)"
+      >
+        <span>價格</span>
+      </mat-button-toggle>
+      <mat-button-toggle
+        value="center"
+        aria-label="Text align center"
+        (click)="SortBy(SortTypeEnum.SoldQty)"
+      >
+        <span>銷售數量</span>
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+  <div class="order-button">
+    <mat-button-toggle-group #group="matButtonToggleGroup">
+      <mat-button-toggle
+        value="right"
+        aria-label="Text align right"
+        (click)="OrderBy(OrderTypeEnum.Asc)"
+      >
+        <span>升序</span>
+      </mat-button-toggle>
+      <mat-button-toggle
+        value="center"
+        aria-label="Text align center"
+        (click)="OrderBy(OrderTypeEnum.Desc)"
+      >
+        <span>降序</span>
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
 </div>

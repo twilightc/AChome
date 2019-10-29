@@ -4,42 +4,74 @@ import {
   Output,
   Input,
   ChangeDetectorRef,
-  EventEmitter
+  EventEmitter,
+  OnDestroy
 } from '@angular/core';
 import { MerchandiseViewModel } from 'src/app/models/CategoryListViewModel';
 import { MerchandiseService } from 'src/app/services/merchandise.service';
-import { SortTypeEnum } from 'src/app/models/SearchRequestModel';
+import { SortTypeEnum, OrderTypeEnum } from 'src/app/models/SearchRequestModel';
 import { SearchEvent } from 'src/app/models/EventModels';
+import { of, BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-search-region',
   templateUrl: './search-region.component.html',
   styleUrls: ['./search-region.component.scss']
 })
-export class SearchRegionComponent implements OnInit {
+export class SearchRegionComponent implements OnInit, OnDestroy {
+  SortTypeEnum = SortTypeEnum;
+  OrderTypeEnum = OrderTypeEnum;
   searchName = '';
-  sortType = SortTypeEnum.None;
+  // sortType = SortTypeEnum.None;
+  // odrerType = OrderTypeEnum.None;
   @Input() merchandiseList = new Array<MerchandiseViewModel>();
   @Output() RenewListBySearching = new EventEmitter<SearchEvent>();
   @Output() Sort = new EventEmitter<number>();
+  searchCommand = new BehaviorSubject<SearchEvent>(
+    new SearchEvent(this.searchName, SortTypeEnum.None, OrderTypeEnum.None)
+  );
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.searchCommand.subscribe(result => {
+      console.log(result);
 
-  SortByPrice() {
-    this.sortType = SortTypeEnum.Price;
-    this.Search();
+      this.RenewListBySearching.emit(result);
+    });
   }
 
-  SortBySoldQty() {
-    this.sortType = SortTypeEnum.SoldQty;
-    this.Search();
+  ngOnDestroy(): void {
+    this.searchCommand.unsubscribe();
+  }
+
+  SortBy(SortType: SortTypeEnum) {
+    this.searchCommand.next(
+      new SearchEvent(
+        this.searchCommand.value.searchName,
+        SortType,
+        this.searchCommand.value.orderType
+      )
+    );
+  }
+
+  OrderBy(OrderType: OrderTypeEnum) {
+    this.searchCommand.next(
+      new SearchEvent(
+        this.searchCommand.value.searchName,
+        this.searchCommand.value.sortType,
+        OrderType
+      )
+    );
   }
 
   Search() {
-    const searchEvent = new SearchEvent(this.searchName, this.sortType);
-
-    this.RenewListBySearching.emit(searchEvent);
+    this.searchCommand.next(
+      new SearchEvent(
+        this.searchName,
+        this.searchCommand.value.sortType,
+        this.searchCommand.value.orderType
+      )
+    );
   }
 }

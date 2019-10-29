@@ -10,7 +10,8 @@ import { of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import {
   SearchRequestModel,
-  SortTypeEnum
+  SortTypeEnum,
+  OrderTypeEnum
 } from 'src/app/models/SearchRequestModel';
 import { SearchEvent } from 'src/app/models/EventModels';
 
@@ -40,16 +41,20 @@ export class MainComponent implements OnInit {
             params.get('Cid'),
             params.get('DetailId'),
             params.get('SortType'),
-            params.get('Keyword')
+            params.get('Keyword'),
+            params.get('OrderType')
           ])
         )
       )
       .subscribe(data => {
+        console.log('999', data);
+
         this.searchRequestModel.CategoryId = data[0];
         this.searchRequestModel.CategoryDetailId = data[1];
-        this.searchRequestModel.SortType = parseInt(data[2], 10);
+        this.searchRequestModel.SortType = +data[2];
         this.searchRequestModel.Keyword = data[3];
         this.searchRequestModel.PageIndex = 1;
+        this.searchRequestModel.OrderType = +data[4];
         this.getMerchandises();
       });
   }
@@ -87,20 +92,11 @@ export class MainComponent implements OnInit {
         }),
         ...(searchEvent.sortType !== SortTypeEnum.None && {
           SortType: searchEvent.sortType
+        }),
+        ...(searchEvent.orderType !== OrderTypeEnum.None && {
+          OrderType: searchEvent.orderType
         })
       }
     ]);
   }
-
-  // RenewListBySorting(sortingType: SortTypeEnum) {
-  //   console.log('sortingType:', sortingType);
-
-  //   this.router.navigate([
-  //     'main',
-  //     {
-  //       Cid: this.searchRequestModel.CategoryId,
-  //       DetailId: this.searchRequestModel.CategoryDetailId
-  //     }
-  //   ]);
-  // }
 }

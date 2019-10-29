@@ -1,20 +1,50 @@
 <!-- <p>merchandise-detail works!</p> -->
 <div class="detail-body">
-  <div>
-    <img src="https://placem.at/places?h=400&w=400" />
+  <div class="image-container">
+    <ng-container *ngIf="!this.merchandise.ImagePath.includes('.jpg')">
+      <img src="https://placem.at/places?h=200&w=200" />
+    </ng-container>
+    <ng-container *ngIf="this.merchandise.ImagePath.includes('.jpg')">
+      <img class="product-image" [src]="merchandise.ImagePath" />
+    </ng-container>
   </div>
   <div class="price-body">
-    <p>售價</p>
-    <p>庫存</p>
+    <div>
+      售價: <span>{{ merchandise.Price }}</span>
+    </div>
+    <div>
+      庫存: <span>{{ merchandise.RemainingQty }}</span>
+    </div>
     <div style="width: 100%;align-items: center">
       <span>購買數量:</span>
-      <div class="amount-btn">
-        <button mat-raised-button class="countbtn">-</button>
-        <input type="text" style="width:30%;text-align: center" />
-        <button mat-raised-button class="countbtn">+</button>
+      <div style="justify-content: space-evenly;">
+        <div class="amount-btn">
+          <button
+            mat-raised-button
+            class="countbtn"
+            (click)="purchasingQty = purchasingQty - 1"
+          >
+            -
+          </button>
+          <input
+            type="text"
+            style="width:30%;text-align: center"
+            [value]="purchasingQty"
+          />
+          <button
+            mat-raised-button
+            class="countbtn"
+            (click)="purchasingQty = purchasingQty + 1"
+          >
+            +
+          </button>
+        </div>
+        <div style="align-items: center;">
+          剩餘{{ merchandise.RemainingQty }}件
+        </div>
       </div>
     </div>
-
+    <div>售出數量:{{ merchandise.SoldQty }}</div>
     <div class="mt20">
       <button mat-raised-button style="background-color: #fca21b">
         <mat-icon>shopping_cart</mat-icon>
@@ -30,17 +60,17 @@
   <app-tabs style="width: 100%">
     <app-tab tabTitle="商品說明">
       <div class="item-info">
-        <p>1.年終肉舖團周年慶</p>
+        <p>{{ merchandise.MerhandiseContent }}}</p>
       </div>
     </app-tab>
     <app-tab tabTitle="問與答">
       <div class="item-info">
-        <p>2三個姑娘六隻奶</p>
+        <p>2問與答</p>
       </div>
     </app-tab>
     <app-tab tabTitle="購買人次">
       <div class="item-info">
-        <p>3我全都要</p>
+        <p>3購買人次</p>
       </div>
     </app-tab>
   </app-tabs>

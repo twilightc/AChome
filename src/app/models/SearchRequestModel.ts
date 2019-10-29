@@ -1,10 +1,11 @@
 export enum SortTypeEnum {
+  None,
   SoldQty,
   Price,
-  Date,
-  None
+  Date
 }
 export enum OrderTypeEnum {
+  None,
   Asc,
   Desc
 }

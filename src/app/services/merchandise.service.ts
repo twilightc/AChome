@@ -22,6 +22,12 @@ export class MerchandiseService {
     );
   }
 
+  GetMerchandise(ItemId: string) {
+    return this.httpclient.get<BaseResponse<MerchandiseViewModel>>(
+      `${environment.apiUrl}Merchandise/GetMerchandise?ItemId=${ItemId}`
+    );
+  }
+
   GetMerchandiseListBySearching(searchRequestModel: SearchRequestModel) {
     return this.httpclient.post<BaseResponse<MerchandiseWrapper>>(
       `${environment.apiUrl}Merchandise/GetMerchandiseListBySearching`,
