@@ -25,7 +25,7 @@
 .amount-btn {
   flex-flow: row nowrap;
   width: 50%;
-  padding-left: 5px;
+  padding-left: 10px;
 }
 
 .mt20 {
@@ -71,4 +71,8 @@
 .price-body > div {
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+.num-part {
+  margin-left: 40px;
 }

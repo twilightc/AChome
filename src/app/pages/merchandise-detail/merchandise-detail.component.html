@@ -10,26 +10,28 @@
   </div>
   <div class="price-body">
     <div>
-      售價: <span>{{ merchandise.Price }}</span>
+      售價
+      <div class="num-part">{{ merchandise.Price }}</div>
     </div>
     <div>
-      庫存: <span>{{ merchandise.RemainingQty }}</span>
+      庫存
+      <div class="num-part">{{ merchandise.RemainingQty }}</div>
     </div>
     <div style="width: 100%;align-items: center">
-      <span>購買數量:</span>
-      <div style="justify-content: space-evenly;">
+      <span>購買數量</span>
+      <div>
         <div class="amount-btn">
           <button
             mat-raised-button
             class="countbtn"
-            (click)="purchasingQty = purchasingQty - 1"
+            (click)="purchasingQty = purchasingQty <= 0 ? 0 : purchasingQty - 1"
           >
             -
           </button>
           <input
             type="text"
             style="width:30%;text-align: center"
-            [value]="purchasingQty"
+            [(ngModel)]="purchasingQty"
           />
           <button
             mat-raised-button
@@ -40,11 +42,14 @@
           </button>
         </div>
         <div style="align-items: center;">
-          剩餘{{ merchandise.RemainingQty }}件
+          剩餘 {{ merchandise.RemainingQty }} 件
         </div>
       </div>
     </div>
-    <div>售出數量:{{ merchandise.SoldQty }}</div>
+    <div>
+      售出
+      <div class="num-part">{{ merchandise.SoldQty }}</div>
+    </div>
     <div class="mt20">
       <button mat-raised-button style="background-color: #fca21b">
         <mat-icon>shopping_cart</mat-icon>

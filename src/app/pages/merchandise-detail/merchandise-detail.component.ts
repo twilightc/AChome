@@ -29,4 +29,8 @@ export class MerchandiseDetailComponent implements OnInit {
         });
       });
   }
+
+  setVal(qty: number) {
+    this.purchasingQty = qty;
+  }
 }
