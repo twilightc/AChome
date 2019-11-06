@@ -1,27 +1,27 @@
 <div class="card-body">
   <div class="image-container">
-    <ng-container *ngIf="!this.merchandise.ImagePath.includes('.jpg')">
+    <ng-container *ngIf="!this.merchandiseInfo.ImagePath.includes('.jpg')">
       <img src="https://placem.at/places?h=200&w=200" />
     </ng-container>
-    <ng-container *ngIf="this.merchandise.ImagePath.includes('.jpg')">
+    <ng-container *ngIf="this.merchandiseInfo.ImagePath.includes('.jpg')">
       <img class="product-image" [src]="merchandise.ImagePath" />
     </ng-container>
   </div>
   <div style="padding: 5px">
     <a
-      [routerLink]="['/detail', { ItemId: merchandise.MerchandiseId }]"
+      [routerLink]="['/detail', { ItemId: merchandiseInfo.MerchandiseId }]"
       style="color:#000000; text-decoration: none;"
     >
-      {{ merchandise.MerchandiseTitle }}
+      {{ merchandiseInfo.MerchandiseTitle }}
     </a>
   </div>
 </div>
 <div>
-  <div style="padding: 5px">${{ merchandise.Price }}</div>
+  <div style="padding: 5px">${{ merchandiseInfo.Price }}</div>
 </div>
 <mat-divider></mat-divider>
 <div class="card-footer">
-  <div>賣出:{{ merchandise.SoldQty }}</div>
+  <div>賣出:{{ merchandiseInfo.SoldQty }}</div>
   <button mat-icon-button color="primary" disabledRipple>
     <mat-icon>favorite_border</mat-icon>
   </button>
