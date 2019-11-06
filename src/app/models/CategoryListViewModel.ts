@@ -27,4 +27,28 @@ export class MerchandiseViewModel {
   CategoryDetailId: string;
   ImagePath: string;
   Price: number;
+  EnableSpec: boolean;
+  MerchandiseSpec: MerchandiseSpecViewModel[];
+  MerchandiseQa: MerchandiseQaViewModel[];
+  Spec1: string[];
+  Spec2: string[];
+}
+
+export class MerchandiseSpecViewModel {
+  SpecId: number;
+  Price: number;
+  SoldQty: number;
+  RemainingQty: number;
+  Spec1: string;
+  Spec2: string;
+  Enable: boolean;
+}
+
+export class MerchandiseQaViewModel {
+  Seq: number;
+  QuestionAccount: string;
+  Question: string;
+  AskingTime: Date;
+  Answer: string;
+  AnswerTime: Date;
 }

@@ -9,6 +9,9 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [],
@@ -22,7 +25,10 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatButtonToggleModule,
     MatDividerModule,
     MatDialogModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatRadioModule,
+    MatProgressSpinnerModule,
+    MatTableModule
   ],
   exports: [
     MatIconModule,
@@ -33,7 +39,10 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatButtonToggleModule,
     MatDividerModule,
     MatDialogModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatRadioModule,
+    MatProgressSpinnerModule,
+    MatTableModule
   ]
 })
 export class ShareMaterialModule {}

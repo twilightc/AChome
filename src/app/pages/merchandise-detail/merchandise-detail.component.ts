@@ -13,6 +13,10 @@ import { MerchandiseService } from 'src/app/services/merchandise.service';
 export class MerchandiseDetailComponent implements OnInit {
   merchandise: MerchandiseViewModel;
   purchasingQty = 0;
+  specOrder = ['', ''];
+  disableSpec = new Array<string[]>();
+  CanCheckOuted = false;
+
   constructor(
     private activateroute: ActivatedRoute,
     private merchandiseservice: MerchandiseService
@@ -26,11 +30,45 @@ export class MerchandiseDetailComponent implements OnInit {
           console.log(response.Data);
           this.merchandise = response.Data;
           this.merchandise.ImagePath = `http://localhost:50390/img/${this.merchandise.ImagePath}`;
+          console.log(this.merchandise.MerchandiseSpec);
+
+          this.merchandise.MerchandiseSpec.forEach(specData => {
+            if (!specData.Enable) {
+              this.disableSpec.push([specData.Spec1, specData.Spec2]);
+            }
+          });
         });
       });
   }
 
-  setVal(qty: number) {
-    this.purchasingQty = qty;
+  checkSpec() {
+    console.log(this.specOrder);
+    console.log(this.disableSpec);
+
+    if (this.specOrder[0] !== '' && this.specOrder[1] !== '') {
+      this.disableSpec.map(data => {
+        if (
+          data[0].includes(this.specOrder[0]) &&
+          data[1].includes(this.specOrder[1])
+        ) {
+          console.log('disable spec');
+          this.CanCheckOuted = true;
+        } else {
+          this.CanCheckOuted = false;
+        }
+      });
+    }
+  }
+
+  setVal() {
+    const regex = /(^[0-9]*[1-9][0-9]*$)/;
+    const result = regex.test(this.purchasingQty.toString());
+
+    !result
+      ? (this.purchasingQty = 0)
+      : (this.purchasingQty =
+          this.purchasingQty >= this.merchandise.RemainingQty
+            ? this.merchandise.RemainingQty
+            : this.purchasingQty);
   }
 }
