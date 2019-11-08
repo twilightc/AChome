@@ -5,7 +5,8 @@ import { environment } from 'src/environments/environment.prod';
 import {
   CategoryListViewModel,
   MerchandiseViewModel,
-  MerchandiseWrapper
+  MerchandiseWrapper,
+  ShoppingCartViewModel
 } from '../models/CategoryListViewModel';
 import { SearchRequestModel } from '../models/SearchRequestModel';
 
@@ -44,6 +45,13 @@ export class MerchandiseService {
   GetCategoryDetailItems(CategoryId: string, CategoryDetailId: string) {
     return this.httpclient.get<BaseResponse<MerchandiseViewModel[]>>(
       `${environment.apiUrl}Merchandise/GetCategoryDetailItems?CategoryId=${CategoryId}&CategoryDetailId=${CategoryDetailId}`
+    );
+  }
+
+  AddToShoppingCart(shoppingcartviewmodel: ShoppingCartViewModel) {
+    return this.httpclient.post<BaseResponse<boolean>>(
+      `${environment.apiUrl}/Merchandise​/AddToShoppingCart`,
+      shoppingcartviewmodel
     );
   }
 }

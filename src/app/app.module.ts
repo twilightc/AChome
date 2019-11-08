@@ -22,6 +22,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
 import { LoginDialogComponent } from './components/dialog/login-dialog/login-dialog.component';
 import { PaginatorComponent } from './components/paginator/paginator.component';
+import { ShoppingCartComponent } from './pages/shopping-cart/shopping-cart.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { PaginatorComponent } from './components/paginator/paginator.component';
     RegisterComponent,
     LoginComponent,
     LoginDialogComponent,
-    PaginatorComponent
+    PaginatorComponent,
+    ShoppingCartComponent
   ],
   imports: [
     BrowserModule,

@@ -71,4 +71,6 @@ export class MerchandiseDetailComponent implements OnInit {
             ? this.merchandise.RemainingQty
             : this.purchasingQty);
   }
+
+  addToShoppingCart() {}
 }
