@@ -7,6 +7,8 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class UserService {
+  account: AccountModel;
+
   constructor(private httpclient: HttpClient) {}
   // public static JWTToken = '';
   isLoggedIn = localStorage.getItem('token') ? true : false;

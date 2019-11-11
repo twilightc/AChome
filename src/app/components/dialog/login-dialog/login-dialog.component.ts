@@ -20,19 +20,21 @@ export class LoginDialogComponent {
   ) {}
 
   onNoClick(): void {
+    this.router.navigate(['/register']);
     this.dialogRef.close();
   }
 
   login() {
-    console.log(this.account);
+    // console.log(this.account);
 
     this.loginservice.Login(this.account).subscribe(response => {
       if (response.Success) {
-        console.log('success');
+        // console.log('success');
         this.loginservice.isLoggedIn = true;
+
         localStorage.setItem('token', response.Data);
+        console.log(this.loginservice.account);
       }
-      this.router.navigate(['/main']);
       this.dialogRef.close();
     });
   }

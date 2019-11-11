@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -23,7 +23,9 @@ import { LoginComponent } from './pages/login/login.component';
 import { LoginDialogComponent } from './components/dialog/login-dialog/login-dialog.component';
 import { PaginatorComponent } from './components/paginator/paginator.component';
 import { ShoppingCartComponent } from './pages/shopping-cart/shopping-cart.component';
-
+import { AddingSuccessComponent } from './pages/merchandise-detail/merchandise-detail.component';
+import { AuthInterceptor } from './auth/auth.Interceptor';
+import { AuthGuard } from './services/authGuard.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +45,8 @@ import { ShoppingCartComponent } from './pages/shopping-cart/shopping-cart.compo
     LoginComponent,
     LoginDialogComponent,
     PaginatorComponent,
-    ShoppingCartComponent
+    ShoppingCartComponent,
+    AddingSuccessComponent
   ],
   imports: [
     BrowserModule,
@@ -53,8 +56,15 @@ import { ShoppingCartComponent } from './pages/shopping-cart/shopping-cart.compo
     FormsModule,
     ShareMaterialModule
   ],
-  providers: [],
+  providers: [
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent],
-  entryComponents: [LoginDialogComponent]
+  entryComponents: [LoginDialogComponent, AddingSuccessComponent]
 })
 export class AppModule {}

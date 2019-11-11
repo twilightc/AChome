@@ -108,6 +108,5 @@ export class HeaderComponent implements AfterViewInit, OnInit {
     console.log('logout');
     this.loginservice.isLoggedIn = false;
     localStorage.removeItem('token');
-    this.router.navigate(['/main']);
   }
 }

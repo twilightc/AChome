@@ -1,9 +1,32 @@
 import { Component, OnInit } from '@angular/core';
-import { MerchandiseViewModel } from 'src/app/models/CategoryListViewModel';
+import {
+  MerchandiseViewModel,
+  ShoppingCartViewModel
+} from 'src/app/models/CategoryListViewModel';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { MerchandiseService } from 'src/app/services/merchandise.service';
+import { UserService } from 'src/app/services/user.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+@Component({
+  selector: 'app-add-to-shopping-cart',
+  templateUrl: './add-to-shopping-cart.html',
+  styles: [
+    `
+      .example-pizza-party {
+        color: hotpink;
+      }
+    `
+  ]
+})
+export class AddingSuccessComponent {
+  constructor(private snackBar: MatSnackBar) {}
+  closeSnackBar() {
+    this.snackBar.dismiss();
+  }
+}
 
 @Component({
   selector: 'app-merchandise-detail',
@@ -13,13 +36,16 @@ import { MerchandiseService } from 'src/app/services/merchandise.service';
 export class MerchandiseDetailComponent implements OnInit {
   merchandise: MerchandiseViewModel;
   purchasingQty = 0;
-  specOrder = ['', ''];
+  specOrder = ['', '']; // size , color
   disableSpec = new Array<string[]>();
   CanCheckOuted = false;
+  durationInSeconds = 3;
 
   constructor(
     private activateroute: ActivatedRoute,
-    private merchandiseservice: MerchandiseService
+    private merchandiseservice: MerchandiseService,
+    private userservice: UserService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
@@ -27,10 +53,10 @@ export class MerchandiseDetailComponent implements OnInit {
       .pipe(switchMap(params => of([params.get('ItemId')])))
       .subscribe(data => {
         this.merchandiseservice.GetMerchandise(data[0]).subscribe(response => {
-          console.log(response.Data);
+          // console.log(response.Data);
           this.merchandise = response.Data;
           this.merchandise.ImagePath = `http://localhost:50390/img/${this.merchandise.ImagePath}`;
-          console.log(this.merchandise.MerchandiseSpec);
+          // console.log(this.merchandise.MerchandiseSpec);
 
           this.merchandise.MerchandiseSpec.forEach(specData => {
             if (!specData.Enable) {
@@ -42,8 +68,8 @@ export class MerchandiseDetailComponent implements OnInit {
   }
 
   checkSpec() {
-    console.log(this.specOrder);
-    console.log(this.disableSpec);
+    // console.log(this.specOrder);
+    // console.log(this.disableSpec);
 
     if (this.specOrder[0] !== '' && this.specOrder[1] !== '') {
       this.disableSpec.map(data => {
@@ -51,7 +77,7 @@ export class MerchandiseDetailComponent implements OnInit {
           data[0].includes(this.specOrder[0]) &&
           data[1].includes(this.specOrder[1])
         ) {
-          console.log('disable spec');
+          // console.log('disable spec');
           this.CanCheckOuted = true;
         } else {
           this.CanCheckOuted = false;
@@ -72,5 +98,43 @@ export class MerchandiseDetailComponent implements OnInit {
             : this.purchasingQty);
   }
 
-  addToShoppingCart() {}
+  addToShoppingCart() {
+    // console.log(localStorage.getItem('token'));
+
+    this.snackBar.openFromComponent(AddingSuccessComponent, {
+      duration: this.durationInSeconds * 500,
+      verticalPosition: 'top'
+    });
+    // if (localStorage.getItem('token')) {
+    //   let specId;
+    //   this.merchandise.MerchandiseSpec.forEach(data => {
+    //     if (
+    //       data.Spec1 === this.specOrder[0] &&
+    //       data.Spec2 === this.specOrder[1]
+    //     ) {
+    //       specId = data.SpecId;
+    //     }
+    //   });
+    //   console.log('purchasingQty', this.purchasingQty);
+
+    //   const shoppingCart: ShoppingCartViewModel = {
+    //     Account: null,
+    //     ProdId: this.merchandise.MerchandiseId,
+    //     SpecId: specId,
+    //     PurchaseQty: this.purchasingQty
+    //   };
+    //   this.merchandiseservice
+    //     .AddToShoppingCart(shoppingCart)
+    //     .subscribe(response => {
+    //       if (response.Success) {
+    //         this.snackBar.openFromComponent(AddingSuccessComponent, {
+    //           duration: this.durationInSeconds * 1000,
+    //           verticalPosition: 'top'
+    //         });
+    //       }
+    //     });
+    // } else {
+    //   console.log('請先登入');
+    // }
+  }
 }

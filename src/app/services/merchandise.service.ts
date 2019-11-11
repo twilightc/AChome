@@ -50,7 +50,7 @@ export class MerchandiseService {
 
   AddToShoppingCart(shoppingcartviewmodel: ShoppingCartViewModel) {
     return this.httpclient.post<BaseResponse<boolean>>(
-      `${environment.apiUrl}/Merchandise​/AddToShoppingCart`,
+      `${environment.apiUrl}Merchandise/AddToShoppingCart`,
       shoppingcartviewmodel
     );
   }

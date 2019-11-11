@@ -57,6 +57,6 @@ export class ShoppingCartViewModel {
   Account: string;
   ProdId: string;
   SpecId: number;
-  PurcaseQty: number;
-  AddTime: Date;
+  PurchaseQty: number;
+  AddTime?: Date;
 }

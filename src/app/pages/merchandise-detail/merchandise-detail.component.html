@@ -7,7 +7,10 @@
   <div class="detail-body">
     <div class="image-container">
       <ng-container
-        *ngIf="this.merchandise.ImagePath.includes('.jpg'); else elseTemplate"
+        *ngIf="
+          merchandise.ImagePath && merchandise.ImagePath.includes('.jpg');
+          else elseTemplate
+        "
       >
         <img class="product-image" [src]="merchandise.ImagePath" />
       </ng-container>

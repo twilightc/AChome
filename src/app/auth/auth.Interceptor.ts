@@ -17,6 +17,8 @@ export class AuthInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
+    // console.log('111111' + localStorage.getItem('token'));
+
     if (
       localStorage.getItem('token') !== null &&
       localStorage.getItem('token') !== ''
@@ -27,6 +29,7 @@ export class AuthInterceptor implements HttpInterceptor {
           'Bearer ' + localStorage.getItem('token')
         )
       });
+
       return next.handle(reqWithHeader).pipe(
         tap(
           succ => {},
