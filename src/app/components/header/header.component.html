@@ -33,9 +33,9 @@
       </button>
     </ng-container>
     <ng-template #elseTemplate>
-      <button mat-icon-button color="primary">
+      <a [routerLink]="['/shoppingCart']">
         <mat-icon>shopping_cart</mat-icon>
-      </button>
+      </a>
       <button mat-button (click)="Logout()">
         Logout
       </button>

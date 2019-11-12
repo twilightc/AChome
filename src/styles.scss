@@ -12,3 +12,11 @@ body {
 #live2dcanvas {
   border: 0 !important;
 }
+
+.mat-radio-outer-circle {
+  border-color: rgba(0, 0, 0, 0.54) !important;
+}
+
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+  border-color: #69f0ae !important;
+}

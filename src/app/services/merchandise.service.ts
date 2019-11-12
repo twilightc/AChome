@@ -6,7 +6,7 @@ import {
   CategoryListViewModel,
   MerchandiseViewModel,
   MerchandiseWrapper,
-  ShoppingCartViewModel
+  ShoppingCart
 } from '../models/CategoryListViewModel';
 import { SearchRequestModel } from '../models/SearchRequestModel';
 
@@ -48,10 +48,16 @@ export class MerchandiseService {
     );
   }
 
-  AddToShoppingCart(shoppingcartviewmodel: ShoppingCartViewModel) {
+  AddToShoppingCart(shoppingcartviewmodel: ShoppingCart) {
     return this.httpclient.post<BaseResponse<boolean>>(
       `${environment.apiUrl}Merchandise/AddToShoppingCart`,
       shoppingcartviewmodel
+    );
+  }
+
+  GetShoppingCart() {
+    return this.httpclient.get<BaseResponse<ShoppingCart[]>>(
+      `${environment.apiUrl}Merchandise/GetShoppingCart`
     );
   }
 }

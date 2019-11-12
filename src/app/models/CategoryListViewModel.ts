@@ -53,10 +53,25 @@ export class MerchandiseQaViewModel {
   AnswerTime: Date;
 }
 
-export class ShoppingCartViewModel {
+export class ShoppingCart {
   Account: string;
   ProdId: string;
   SpecId: number;
   PurchaseQty: number;
   AddTime?: Date;
+}
+
+export class ShoppingCartWrapper {
+  SellerAcount: string;
+  ShoppingCartViewModels: ShoppingCartViewModel[];
+}
+
+export class ShoppingCartViewModel {
+  MerchandiseTitle: string;
+  OwnerAccount: string;
+  MerchandiseId: string;
+  Price?: number;
+  Spec1: string;
+  Spec2: string;
+  PurchaseQty: number;
 }

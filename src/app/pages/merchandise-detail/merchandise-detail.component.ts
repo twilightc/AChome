@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {
   MerchandiseViewModel,
-  ShoppingCartViewModel
+  ShoppingCart
 } from 'src/app/models/CategoryListViewModel';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
@@ -101,40 +101,40 @@ export class MerchandiseDetailComponent implements OnInit {
   addToShoppingCart() {
     // console.log(localStorage.getItem('token'));
 
-    this.snackBar.openFromComponent(AddingSuccessComponent, {
-      duration: this.durationInSeconds * 500,
-      verticalPosition: 'top'
-    });
-    // if (localStorage.getItem('token')) {
-    //   let specId;
-    //   this.merchandise.MerchandiseSpec.forEach(data => {
-    //     if (
-    //       data.Spec1 === this.specOrder[0] &&
-    //       data.Spec2 === this.specOrder[1]
-    //     ) {
-    //       specId = data.SpecId;
-    //     }
-    //   });
-    //   console.log('purchasingQty', this.purchasingQty);
+    // this.snackBar.openFromComponent(AddingSuccessComponent, {
+    //   duration: this.durationInSeconds * 500,
+    //   verticalPosition: 'top'
+    // });
+    if (localStorage.getItem('token')) {
+      let specId;
+      this.merchandise.MerchandiseSpec.forEach(data => {
+        if (
+          data.Spec1 === this.specOrder[0] &&
+          data.Spec2 === this.specOrder[1]
+        ) {
+          specId = data.SpecId;
+        }
+      });
+      console.log('purchasingQty', this.purchasingQty);
 
-    //   const shoppingCart: ShoppingCartViewModel = {
-    //     Account: null,
-    //     ProdId: this.merchandise.MerchandiseId,
-    //     SpecId: specId,
-    //     PurchaseQty: this.purchasingQty
-    //   };
-    //   this.merchandiseservice
-    //     .AddToShoppingCart(shoppingCart)
-    //     .subscribe(response => {
-    //       if (response.Success) {
-    //         this.snackBar.openFromComponent(AddingSuccessComponent, {
-    //           duration: this.durationInSeconds * 1000,
-    //           verticalPosition: 'top'
-    //         });
-    //       }
-    //     });
-    // } else {
-    //   console.log('請先登入');
-    // }
+      const shoppingCart: ShoppingCart = {
+        Account: null,
+        ProdId: this.merchandise.MerchandiseId,
+        SpecId: specId,
+        PurchaseQty: this.purchasingQty
+      };
+      this.merchandiseservice
+        .AddToShoppingCart(shoppingCart)
+        .subscribe(response => {
+          if (response.Success) {
+            this.snackBar.openFromComponent(AddingSuccessComponent, {
+              duration: this.durationInSeconds * 1000,
+              verticalPosition: 'top'
+            });
+          }
+        });
+    } else {
+      console.log('請先登入');
+    }
   }
 }
