@@ -1,0 +1,61 @@
+:host {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.account {
+  width: 100%;
+  height: 20px;
+  color: #b1470e;
+  margin-top: 30px;
+}
+
+.table-part {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+  align-items: center;
+}
+
+table {
+  width: 100%;
+}
+
+.shopping-cart-table {
+  // background-color: #fff;
+  margin-bottom: 10px;
+}
+
+.mat-column-select {
+  width: 40px;
+}
+
+.mat-column-MerchandiseTitle {
+  max-width: 200px;
+}
+
+.mat-column-Price {
+  text-align: right;
+  padding: 0 10px;
+}
+
+.mat-column-PurchaseQty {
+  text-align: right;
+}
+
+.mat-column-TotalPrice {
+  text-align: right;
+}
+
+.bill-part {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.first-footer-row {
+  font-weight: bold;
+}

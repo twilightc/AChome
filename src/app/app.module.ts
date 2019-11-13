@@ -26,6 +26,7 @@ import { ShoppingCartComponent } from './pages/shopping-cart/shopping-cart.compo
 import { AddingSuccessComponent } from './pages/merchandise-detail/merchandise-detail.component';
 import { AuthInterceptor } from './auth/auth.Interceptor';
 import { AuthGuard } from './services/authGuard.service';
+import { ShoppingcartTableComponent } from './components/shoppingcart-table/shoppingcart-table.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +47,8 @@ import { AuthGuard } from './services/authGuard.service';
     LoginDialogComponent,
     PaginatorComponent,
     ShoppingCartComponent,
-    AddingSuccessComponent
+    AddingSuccessComponent,
+    ShoppingcartTableComponent
   ],
   imports: [
     BrowserModule,

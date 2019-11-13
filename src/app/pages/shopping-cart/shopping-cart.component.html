@@ -1,61 +1,6 @@
 <div class="root">
-  <table
+  <app-shoppingcart-table
+    [shoppingCartRawData]="data"
     *ngFor="let data of shoppingCartWrapper"
-    mat-table
-    [dataSource]="data.ShoppingCartViewModels"
-    class="mat-elevation-z8 shopping-cart-table"
-  >
-    <!-- (change)="$event ? masterToggle() : null"
-          [checked]="selection.hasValue() && isAllSelected()"
-          [indeterminate]="selection.hasValue() && !isAllSelected()"
-          [aria-label]="checkboxLabel()" -->
-    <!-- (click)="$event.stopPropagation()"
-          (change)="$event ? selection.toggle(cart) : null"
-          [checked]="selection.isSelected(cart)"
-          [aria-label]="checkboxLabel(cart, i)" -->
-
-    <ng-container matColumnDef="select">
-      <th mat-header-cell *matHeaderCellDef>
-        <mat-checkbox (change)="masterToggle(data.ShoppingCartViewModels)">
-        </mat-checkbox>
-      </th>
-      <td mat-cell *matCellDef="let cart; let i = index">
-        <mat-checkbox (change)="$event ? selection.toggle(cart) : null">
-        </mat-checkbox>
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="MerchandiseTitle">
-      <th mat-header-cell *matHeaderCellDef>品名</th>
-      <td mat-cell *matCellDef="let cart">{{ cart.MerchandiseTitle }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="Spec1">
-      <th mat-header-cell *matHeaderCellDef>規格1</th>
-      <td mat-cell *matCellDef="let cart">{{ cart.Spec1 }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="Spec2">
-      <th mat-header-cell *matHeaderCellDef>規格2</th>
-      <td mat-cell *matCellDef="let cart">{{ cart.Spec2 }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="Price">
-      <th mat-header-cell *matHeaderCellDef>單價</th>
-      <td mat-cell *matCellDef="let cart">{{ cart.Price }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="PurchaseQty">
-      <th mat-header-cell *matHeaderCellDef>購買數量</th>
-      <td mat-cell *matCellDef="let cart">{{ cart.PurchaseQty }}</td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr
-      mat-row
-      *matRowDef="let data; columns: displayedColumns"
-      (click)="selection.toggle(data)"
-    ></tr>
-    <!-- miss ngClick -->
-  </table>
+  ></app-shoppingcart-table>
 </div>

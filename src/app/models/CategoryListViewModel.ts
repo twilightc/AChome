@@ -62,7 +62,7 @@ export class ShoppingCart {
 }
 
 export class ShoppingCartWrapper {
-  SellerAcount: string;
+  SellerAccount: string;
   ShoppingCartViewModels: ShoppingCartViewModel[];
 }
 

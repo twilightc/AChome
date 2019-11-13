@@ -1,0 +1,88 @@
+<div class="account">
+  <div>{{ shoppingCartData.SellerAccount }}</div>
+</div>
+<div class="table-part">
+  <table
+    mat-table
+    [dataSource]="shoppingCartDataSource"
+    class="mat-elevation-z8 shopping-cart-table"
+  >
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox
+          (change)="$event ? masterToggle() : null"
+          [checked]="selection.hasValue() && isAllSelected()"
+          [indeterminate]="selection.hasValue() && !isAllSelected()"
+          [aria-label]="checkboxLabel()"
+        >
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let cart; let i = index">
+        <mat-checkbox
+          (click)="$event.stopPropagation()"
+          (change)="$event ? selection.toggle(cart) : null"
+          [checked]="selection.isSelected(cart)"
+          [aria-label]="checkboxLabel(cart, i)"
+        >
+        </mat-checkbox>
+      </td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+
+    <ng-container matColumnDef="MerchandiseTitle">
+      <th mat-header-cell *matHeaderCellDef>品名</th>
+      <td mat-cell *matCellDef="let cart">{{ cart.MerchandiseTitle }}</td>
+      <td mat-footer-cell *matFooterCellDef>小計</td>
+    </ng-container>
+
+    <ng-container matColumnDef="Spec1">
+      <th mat-header-cell *matHeaderCellDef>規格1</th>
+      <td mat-cell *matCellDef="let cart">{{ cart.Spec1 }}</td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+
+    <ng-container matColumnDef="Spec2">
+      <th mat-header-cell *matHeaderCellDef>規格2</th>
+      <td mat-cell *matCellDef="let cart">{{ cart.Spec2 }}</td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+
+    <ng-container matColumnDef="Price">
+      <th mat-header-cell *matHeaderCellDef>單價</th>
+      <td mat-cell *matCellDef="let cart">
+        {{ cart.Price | currency: 'TWD':'symbol-narrow':'1.0-0' }}
+      </td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+
+    <ng-container matColumnDef="PurchaseQty">
+      <th mat-header-cell *matHeaderCellDef>購買數量</th>
+      <td mat-cell *matCellDef="let cart">{{ cart.PurchaseQty }}</td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+
+    <ng-container matColumnDef="TotalPrice">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let cart"></td>
+      <td mat-footer-cell *matFooterCellDef>
+        {{ getTotalCost() | currency: 'TWD':'symbol-narrow':'1.0-0' }}
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr
+      mat-row
+      *matRowDef="let data; columns: displayedColumns"
+      (click)="selection.toggle(data)"
+    ></tr>
+    <tr
+      mat-footer-row
+      *matFooterRowDef="displayedColumns"
+      class="first-footer-row"
+    ></tr>
+  </table>
+</div>
+<div class="bill-part">
+  <button mat-raised-button color="warn">刪除</button>
+  <button mat-raised-button color="primary">出來結帳</button>
+</div>
