@@ -6,7 +6,8 @@ import {
   CategoryListViewModel,
   MerchandiseViewModel,
   MerchandiseWrapper,
-  ShoppingCart
+  ShoppingCart,
+  ShoppingCartWrapper
 } from '../models/CategoryListViewModel';
 import { SearchRequestModel } from '../models/SearchRequestModel';
 
@@ -56,7 +57,7 @@ export class MerchandiseService {
   }
 
   GetShoppingCart() {
-    return this.httpclient.get<BaseResponse<ShoppingCart[]>>(
+    return this.httpclient.get<BaseResponse<ShoppingCartWrapper[]>>(
       `${environment.apiUrl}Merchandise/GetShoppingCart`
     );
   }
