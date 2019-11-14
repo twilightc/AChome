@@ -11,8 +11,8 @@ import { UserService } from 'src/app/services/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-add-to-shopping-cart',
-  templateUrl: './add-to-shopping-cart.html',
+  selector: 'app-add-to-shoppingcart-snackbar',
+  templateUrl: './add-to-shoppingcart-snackbar.html',
   styles: [
     `
       .example-pizza-party {
@@ -53,10 +53,8 @@ export class MerchandiseDetailComponent implements OnInit {
       .pipe(switchMap(params => of([params.get('ItemId')])))
       .subscribe(data => {
         this.merchandiseservice.GetMerchandise(data[0]).subscribe(response => {
-          // console.log(response.Data);
           this.merchandise = response.Data;
           this.merchandise.ImagePath = `http://localhost:50390/img/${this.merchandise.ImagePath}`;
-          // console.log(this.merchandise.MerchandiseSpec);
 
           this.merchandise.MerchandiseSpec.forEach(specData => {
             if (!specData.Enable) {
@@ -68,9 +66,6 @@ export class MerchandiseDetailComponent implements OnInit {
   }
 
   checkSpec() {
-    // console.log(this.specOrder);
-    // console.log(this.disableSpec);
-
     if (this.specOrder[0] !== '' && this.specOrder[1] !== '') {
       this.disableSpec.map(data => {
         if (
@@ -99,12 +94,6 @@ export class MerchandiseDetailComponent implements OnInit {
   }
 
   addToShoppingCart() {
-    // console.log(localStorage.getItem('token'));
-
-    // this.snackBar.openFromComponent(AddingSuccessComponent, {
-    //   duration: this.durationInSeconds * 500,
-    //   verticalPosition: 'top'
-    // });
     if (localStorage.getItem('token')) {
       let specId;
       this.merchandise.MerchandiseSpec.forEach(data => {

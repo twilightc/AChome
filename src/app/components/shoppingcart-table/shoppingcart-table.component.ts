@@ -1,10 +1,34 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import {
   ShoppingCartWrapper,
   ShoppingCartViewModel
 } from 'src/app/models/CategoryListViewModel';
+import {
+  RemoveShoppingCartItemModel,
+  RemoveShoppingCartWrapper
+} from 'src/app/models/RemoveShoppingCartItemModel';
+import { MerchandiseService } from 'src/app/services/merchandise.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+@Component({
+  selector: 'app-remove-item-snackbar',
+  templateUrl: './remove-item-snackbar.html',
+  styles: [
+    `
+      .remove-message {
+        color: #99ff4d;
+      }
+    `
+  ]
+})
+export class RemoveItemSuccessComponent {
+  constructor(private snackBar: MatSnackBar) {}
+  closeSnackBar() {
+    this.snackBar.dismiss();
+  }
+}
 
 @Component({
   selector: 'app-shoppingcart-table',
@@ -25,12 +49,15 @@ export class ShoppingcartTableComponent implements OnInit {
   selection = new SelectionModel<ShoppingCartViewModel>(true, []);
   shoppingCartData: ShoppingCartWrapper;
   @Input() shoppingCartRawData: ShoppingCartWrapper;
+  @Output() RenewShoppingCartRawData = new EventEmitter();
 
-  constructor() {}
+  constructor(
+    private merchandiseservice: MerchandiseService,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit() {
     this.shoppingCartData = this.shoppingCartRawData;
-    console.log(this.shoppingCartData.SellerAccount);
 
     this.shoppingCartDataSource = new MatTableDataSource<ShoppingCartViewModel>(
       this.shoppingCartData.ShoppingCartViewModels
@@ -44,12 +71,13 @@ export class ShoppingcartTableComponent implements OnInit {
     return numSelected === numRows;
   }
 
-  masterToggle(data: ShoppingCartViewModel[]) {
+  masterToggle() {
     this.isAllSelected()
       ? this.selection.clear()
-      : this.shoppingCartDataSource.data.forEach(row => {
-          this.selection.select(row);
-        });
+      : this.shoppingCartDataSource.data.forEach(row =>
+          this.selection.select(row)
+        );
+    console.log('masterToggle:', this.selection);
   }
 
   /** The label for the checkbox on the passed row */
@@ -66,5 +94,40 @@ export class ShoppingcartTableComponent implements OnInit {
     return this.shoppingCartData.ShoppingCartViewModels.map(
       data => data.PurchaseQty * data.Price
     ).reduce((acc, value) => acc + value, 0);
+  }
+
+  checkChanged(cart: ShoppingCartViewModel) {
+    console.log(this.selection);
+
+    this.selection.toggle(cart);
+  }
+
+  deleteItem() {
+    console.log(this.selection.selected);
+
+    const removedItemsInCart: RemoveShoppingCartItemModel[] = this.selection.selected.map(
+      data => {
+        console.log(data);
+
+        return {
+          Account: data.OwnerAccount,
+          ProdId: data.MerchandiseId,
+          SpecId: data.SpecId
+        };
+      }
+    );
+    console.log(removedItemsInCart);
+
+    this.merchandiseservice
+      .RemoveShoppingCartItem(removedItemsInCart)
+      .subscribe(response => {
+        if (response.Success) {
+          this.snackBar.openFromComponent(RemoveItemSuccessComponent, {
+            duration: 3000,
+            verticalPosition: 'top'
+          });
+          this.RenewShoppingCartRawData.emit();
+        }
+      });
   }
 }

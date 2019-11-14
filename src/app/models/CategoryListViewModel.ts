@@ -70,6 +70,7 @@ export class ShoppingCartViewModel {
   MerchandiseTitle: string;
   OwnerAccount: string;
   MerchandiseId: string;
+  SpecId: number;
   Price?: number;
   Spec1: string;
   Spec2: string;

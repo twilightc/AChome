@@ -16,6 +16,10 @@ export class ShoppingCartComponent implements OnInit {
   constructor(private merchandiseservice: MerchandiseService) {}
 
   ngOnInit() {
+    this.RenewShoppingCartRawData();
+  }
+
+  RenewShoppingCartRawData() {
     this.merchandiseservice.GetShoppingCart().subscribe(response => {
       this.shoppingCartWrapper = response.Data;
     });

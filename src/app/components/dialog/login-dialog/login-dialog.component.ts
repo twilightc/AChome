@@ -33,7 +33,7 @@ export class LoginDialogComponent {
         this.loginservice.isLoggedIn = true;
 
         localStorage.setItem('token', response.Data);
-        console.log(this.loginservice.account);
+        // console.log(this.loginservice.account);
       }
       this.dialogRef.close();
     });

@@ -10,6 +10,7 @@ import {
   ShoppingCartWrapper
 } from '../models/CategoryListViewModel';
 import { SearchRequestModel } from '../models/SearchRequestModel';
+import { RemoveShoppingCartItemModel } from '../models/RemoveShoppingCartItemModel';
 
 @Injectable({
   providedIn: 'root'
@@ -59,6 +60,15 @@ export class MerchandiseService {
   GetShoppingCart() {
     return this.httpclient.get<BaseResponse<ShoppingCartWrapper[]>>(
       `${environment.apiUrl}Merchandise/GetShoppingCart`
+    );
+  }
+
+  RemoveShoppingCartItem(
+    removeshoppingcartttemmodel: RemoveShoppingCartItemModel[]
+  ) {
+    return this.httpclient.put<BaseResponse<boolean>>(
+      `${environment.apiUrl}Merchandise/RemoveShoppingCartItem`,
+      removeshoppingcartttemmodel
     );
   }
 }

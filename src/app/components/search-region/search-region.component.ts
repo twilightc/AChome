@@ -22,11 +22,9 @@ export class SearchRegionComponent implements OnInit, OnDestroy {
   SortTypeEnum = SortTypeEnum;
   OrderTypeEnum = OrderTypeEnum;
   searchName = '';
-  // sortType = SortTypeEnum.None;
-  // odrerType = OrderTypeEnum.None;
   @Input() merchandiseList = new Array<MerchandiseViewModel>();
   @Output() RenewListBySearching = new EventEmitter<SearchEvent>();
-  @Output() Sort = new EventEmitter<number>();
+  // @Output() Sort = new EventEmitter<number>();
   searchCommand = new BehaviorSubject<SearchEvent>(
     new SearchEvent(this.searchName, SortTypeEnum.None, OrderTypeEnum.None)
   );

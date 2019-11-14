@@ -27,6 +27,7 @@ import { AddingSuccessComponent } from './pages/merchandise-detail/merchandise-d
 import { AuthInterceptor } from './auth/auth.Interceptor';
 import { AuthGuard } from './services/authGuard.service';
 import { ShoppingcartTableComponent } from './components/shoppingcart-table/shoppingcart-table.component';
+import { RemoveItemSuccessComponent } from './components/shoppingcart-table/shoppingcart-table.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,7 +49,8 @@ import { ShoppingcartTableComponent } from './components/shoppingcart-table/shop
     PaginatorComponent,
     ShoppingCartComponent,
     AddingSuccessComponent,
-    ShoppingcartTableComponent
+    ShoppingcartTableComponent,
+    RemoveItemSuccessComponent
   ],
   imports: [
     BrowserModule,
@@ -67,6 +69,10 @@ import { ShoppingcartTableComponent } from './components/shoppingcart-table/shop
     }
   ],
   bootstrap: [AppComponent],
-  entryComponents: [LoginDialogComponent, AddingSuccessComponent]
+  entryComponents: [
+    LoginDialogComponent,
+    AddingSuccessComponent,
+    RemoveItemSuccessComponent
+  ]
 })
 export class AppModule {}
