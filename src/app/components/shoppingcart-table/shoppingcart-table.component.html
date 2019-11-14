@@ -63,8 +63,13 @@
     </ng-container>
 
     <ng-container matColumnDef="TotalPrice">
-      <th mat-header-cell *matHeaderCellDef></th>
-      <td mat-cell *matCellDef="let cart"></td>
+      <th mat-header-cell *matHeaderCellDef>總價</th>
+      <td mat-cell *matCellDef="let cart">
+        {{
+          cart.PurchaseQty * cart.Price
+            | currency: 'TWD':'symbol-narrow':'1.0-0'
+        }}
+      </td>
       <td mat-footer-cell *matFooterCellDef>
         {{ getTotalCost() | currency: 'TWD':'symbol-narrow':'1.0-0' }}
       </td>

@@ -16,7 +16,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styles: [
     `
       .example-pizza-party {
-        color: hotpink;
+        color: #ff8c00;
       }
     `
   ]

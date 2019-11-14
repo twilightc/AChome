@@ -18,7 +18,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styles: [
     `
       .remove-message {
-        color: #99ff4d;
+        color: #32cd32;
       }
     `
   ]
