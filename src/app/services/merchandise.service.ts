@@ -5,10 +5,10 @@ import { environment } from 'src/environments/environment.prod';
 import {
   CategoryListViewModel,
   MerchandiseViewModel,
-  MerchandiseWrapper,
-  ShoppingCart,
-  ShoppingCartWrapper
+  MerchandiseWrapper
 } from '../models/CategoryListViewModel';
+import { ShoppingCart, ShoppingCartWrapper } from '../models/ShoppingCartModel';
+
 import { SearchRequestModel } from '../models/SearchRequestModel';
 import { RemoveShoppingCartItemModel } from '../models/RemoveShoppingCartItemModel';
 

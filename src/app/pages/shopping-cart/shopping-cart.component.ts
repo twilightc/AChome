@@ -3,7 +3,7 @@ import { MerchandiseService } from 'src/app/services/merchandise.service';
 import {
   ShoppingCartWrapper,
   ShoppingCartViewModel
-} from 'src/app/models/CategoryListViewModel';
+} from 'src/app/models/ShoppingCartModel';
 
 @Component({
   selector: 'app-shopping-cart',

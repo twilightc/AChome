@@ -4,11 +4,8 @@ import { SelectionModel } from '@angular/cdk/collections';
 import {
   ShoppingCartWrapper,
   ShoppingCartViewModel
-} from 'src/app/models/CategoryListViewModel';
-import {
-  RemoveShoppingCartItemModel,
-  RemoveShoppingCartWrapper
-} from 'src/app/models/RemoveShoppingCartItemModel';
+} from 'src/app/models/ShoppingCartModel';
+import { RemoveShoppingCartItemModel } from 'src/app/models/RemoveShoppingCartItemModel';
 import { MerchandiseService } from 'src/app/services/merchandise.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackbarScaffoldComponent } from '../snackbar/snackbar-scaffold/snackbar-scaffold.component';

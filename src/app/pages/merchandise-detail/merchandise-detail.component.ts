@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  MerchandiseViewModel,
-  ShoppingCart
-} from 'src/app/models/CategoryListViewModel';
+import { MerchandiseViewModel } from 'src/app/models/CategoryListViewModel';
+
+import { ShoppingCart } from 'src/app/models/ShoppingCartModel';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
