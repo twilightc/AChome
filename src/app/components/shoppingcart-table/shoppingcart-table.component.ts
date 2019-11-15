@@ -11,24 +11,7 @@ import {
 } from 'src/app/models/RemoveShoppingCartItemModel';
 import { MerchandiseService } from 'src/app/services/merchandise.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
-@Component({
-  selector: 'app-remove-item-snackbar',
-  templateUrl: './remove-item-snackbar.html',
-  styles: [
-    `
-      .remove-message {
-        color: #32cd32;
-      }
-    `
-  ]
-})
-export class RemoveItemSuccessComponent {
-  constructor(private snackBar: MatSnackBar) {}
-  closeSnackBar() {
-    this.snackBar.dismiss();
-  }
-}
+import { SnackbarScaffoldComponent } from '../snackbar/snackbar-scaffold/snackbar-scaffold.component';
 
 @Component({
   selector: 'app-shoppingcart-table',
@@ -103,7 +86,7 @@ export class ShoppingcartTableComponent implements OnInit {
   }
 
   deleteItem() {
-    console.log(this.selection.selected);
+    // console.log(this.selection.selected);
 
     const removedItemsInCart: RemoveShoppingCartItemModel[] = this.selection.selected.map(
       data => {
@@ -122,9 +105,13 @@ export class ShoppingcartTableComponent implements OnInit {
       .RemoveShoppingCartItem(removedItemsInCart)
       .subscribe(response => {
         if (response.Success) {
-          this.snackBar.openFromComponent(RemoveItemSuccessComponent, {
+          this.snackBar.openFromComponent(SnackbarScaffoldComponent, {
             duration: 3000,
-            verticalPosition: 'top'
+            verticalPosition: 'top',
+            data: {
+              text: '商品已從購物車移除',
+              textColor: '#32cd32'
+            }
           });
           this.RenewShoppingCartRawData.emit();
         }

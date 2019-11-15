@@ -23,11 +23,11 @@ import { LoginComponent } from './pages/login/login.component';
 import { LoginDialogComponent } from './components/dialog/login-dialog/login-dialog.component';
 import { PaginatorComponent } from './components/paginator/paginator.component';
 import { ShoppingCartComponent } from './pages/shopping-cart/shopping-cart.component';
-import { AddingSuccessComponent } from './pages/merchandise-detail/merchandise-detail.component';
 import { AuthInterceptor } from './auth/auth.Interceptor';
 import { AuthGuard } from './services/authGuard.service';
 import { ShoppingcartTableComponent } from './components/shoppingcart-table/shoppingcart-table.component';
-import { RemoveItemSuccessComponent } from './components/shoppingcart-table/shoppingcart-table.component';
+import { CheckoutDialogComponent } from './components/dialog/checkout-dialog/checkout-dialog.component';
+import { SnackbarScaffoldComponent } from './components/snackbar/snackbar-scaffold/snackbar-scaffold.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,9 +48,9 @@ import { RemoveItemSuccessComponent } from './components/shoppingcart-table/shop
     LoginDialogComponent,
     PaginatorComponent,
     ShoppingCartComponent,
-    AddingSuccessComponent,
     ShoppingcartTableComponent,
-    RemoveItemSuccessComponent
+    CheckoutDialogComponent,
+    SnackbarScaffoldComponent
   ],
   imports: [
     BrowserModule,
@@ -69,10 +69,6 @@ import { RemoveItemSuccessComponent } from './components/shoppingcart-table/shop
     }
   ],
   bootstrap: [AppComponent],
-  entryComponents: [
-    LoginDialogComponent,
-    AddingSuccessComponent,
-    RemoveItemSuccessComponent
-  ]
+  entryComponents: [LoginDialogComponent, SnackbarScaffoldComponent]
 })
 export class AppModule {}

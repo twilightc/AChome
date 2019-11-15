@@ -9,24 +9,7 @@ import { of } from 'rxjs';
 import { MerchandiseService } from 'src/app/services/merchandise.service';
 import { UserService } from 'src/app/services/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
-@Component({
-  selector: 'app-add-to-shoppingcart-snackbar',
-  templateUrl: './add-to-shoppingcart-snackbar.html',
-  styles: [
-    `
-      .example-pizza-party {
-        color: #ff8c00;
-      }
-    `
-  ]
-})
-export class AddingSuccessComponent {
-  constructor(private snackBar: MatSnackBar) {}
-  closeSnackBar() {
-    this.snackBar.dismiss();
-  }
-}
+import { SnackbarScaffoldComponent } from 'src/app/components/snackbar/snackbar-scaffold/snackbar-scaffold.component';
 
 @Component({
   selector: 'app-merchandise-detail',
@@ -116,9 +99,13 @@ export class MerchandiseDetailComponent implements OnInit {
         .AddToShoppingCart(shoppingCart)
         .subscribe(response => {
           if (response.Success) {
-            this.snackBar.openFromComponent(AddingSuccessComponent, {
+            this.snackBar.openFromComponent(SnackbarScaffoldComponent, {
               duration: this.durationInSeconds * 1000,
-              verticalPosition: 'top'
+              verticalPosition: 'top',
+              data: {
+                text: '商品已加入購物車',
+                textColor: '#ff8c00'
+              }
             });
           }
         });

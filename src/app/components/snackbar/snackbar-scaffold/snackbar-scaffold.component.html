@@ -1,5 +1,5 @@
-<span class="example-pizza-party">
-  商品已加入購物車
+<span [ngStyle]="{ color: setTextColor() }">
+  {{ snackBarData.text }}
 </span>
 <button mat-icon-button (click)="closeSnackBar()">
   <mat-icon>cancel</mat-icon>
