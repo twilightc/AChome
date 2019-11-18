@@ -2,5 +2,113 @@
   填寫詳細資料
 </h1>
 <mat-dialog-content>
-  <!-- ShoppingCartWrapper -->
+  <table mat-table [dataSource]="shoppingCartData" class="mat-elevation-z8">
+    <ng-container matColumnDef="MerchandiseTitle">
+      <th mat-header-cell *matHeaderCellDef>品名</th>
+      <td mat-cell *matCellDef="let element">{{ element.MerchandiseTitle }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="Spec1">
+      <th mat-header-cell *matHeaderCellDef>規格一</th>
+      <td mat-cell *matCellDef="let element">{{ element.Spec1 }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="Spec2">
+      <th mat-header-cell *matHeaderCellDef>規格二</th>
+      <td mat-cell *matCellDef="let element">{{ element.Spec2 }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="PurchaseQty">
+      <th mat-header-cell *matHeaderCellDef>購買數量</th>
+      <td mat-cell *matCellDef="let element">{{ element.PurchaseQty }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <mat-divider></mat-divider>
+  <div>
+    <span>取件人:</span>
+    <mat-form-field class="example-form-field">
+      <input matInput type="text" [(ngModel)]="checkoutOrder.Recipient" />
+      <button
+        mat-button
+        *ngIf="checkoutOrder.Recipient"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="checkoutOrder.Recipient = ''"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+  <div>
+    <span>運送方式:</span>
+    <mat-form-field>
+      <mat-select [(value)]="checkoutOrder.TransportId">
+        <mat-option
+          *ngFor="let method of transportMethodList"
+          [value]="method.TransportId"
+          >{{ method.TransportName }} {{ method.Fee }}元</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div *ngIf="checkoutOrder.TransportId === 711">
+    <span>取貨門市:</span>
+    <mat-form-field>
+      <mat-select [(value)]="ReceiveShopAddress.Area">
+        <mat-option
+          *ngFor="let city of twCityList | keyvalue"
+          [value]="city.key"
+          >{{ city.key }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field *ngIf="ReceiveShopAddress.Area">
+      <mat-select [(value)]="ReceiveShopAddress.Zip">
+        <mat-option
+          *ngFor="let village of twCityList[ReceiveShopAddress.Area]"
+          [value]="village.Zip"
+          >{{ village.Area }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field *ngIf="ReceiveShopAddress.Zip">
+      <mat-select [(value)]="checkoutOrder.ReceiveShop.Address">
+        <mat-option
+          *ngFor="let shopList of filterShopList()"
+          [value]="shopList.Address"
+          >{{ shopList.Address }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <!-- <div>
+    <span>收件人地址:</span>
+  </div> -->
+  <div>
+    <span>連絡電話:</span>
+    <mat-form-field class="example-form-field">
+      <input matInput type="text" [(ngModel)]="checkoutOrder.ReceiverPhone" />
+      <button
+        mat-button
+        *ngIf="checkoutOrder.ReceiverPhone"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="checkoutOrder.ReceiverPhone = ''"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
 </mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button color="primary">送出訂單</button>
+  <button mat-button mat-dialog-close color="warn">取消</button>
+</mat-dialog-actions>

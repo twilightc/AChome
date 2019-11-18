@@ -81,14 +81,16 @@
       *matRowDef="let data; columns: displayedColumns"
       (click)="selection.toggle(data)"
     ></tr>
-    <tr
+    <!-- <tr
       mat-footer-row
       *matFooterRowDef="displayedColumns"
       class="first-footer-row"
-    ></tr>
+    ></tr> -->
   </table>
 </div>
 <div class="bill-part">
   <button mat-raised-button color="warn" (click)="deleteItem()">刪除</button>
-  <button mat-raised-button color="primary">出來結帳</button>
+  <button mat-raised-button color="primary" (click)="checkingOut()">
+    出來結帳
+  </button>
 </div>

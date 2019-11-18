@@ -52,14 +52,14 @@ export class MerchandiseService {
 
   AddToShoppingCart(shoppingcartviewmodel: ShoppingCart) {
     return this.httpclient.post<BaseResponse<boolean>>(
-      `${environment.apiUrl}Merchandise/AddToShoppingCart`,
+      `${environment.apiUrl}ShoppingCart/AddToShoppingCart`,
       shoppingcartviewmodel
     );
   }
 
   GetShoppingCart() {
     return this.httpclient.get<BaseResponse<ShoppingCartWrapper[]>>(
-      `${environment.apiUrl}Merchandise/GetShoppingCart`
+      `${environment.apiUrl}ShoppingCart/GetShoppingCart`
     );
   }
 
@@ -67,7 +67,7 @@ export class MerchandiseService {
     removeshoppingcartttemmodel: RemoveShoppingCartItemModel[]
   ) {
     return this.httpclient.put<BaseResponse<boolean>>(
-      `${environment.apiUrl}Merchandise/RemoveShoppingCartItem`,
+      `${environment.apiUrl}ShoppingCart/RemoveShoppingCartItem`,
       removeshoppingcartttemmodel
     );
   }

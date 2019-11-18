@@ -9,6 +9,8 @@ import { RemoveShoppingCartItemModel } from 'src/app/models/RemoveShoppingCartIt
 import { MerchandiseService } from 'src/app/services/merchandise.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackbarScaffoldComponent } from '../snackbar/snackbar-scaffold/snackbar-scaffold.component';
+import { MatDialog } from '@angular/material/dialog';
+import { CheckoutDialogComponent } from '../dialog/checkout-dialog/checkout-dialog.component';
 
 @Component({
   selector: 'app-shoppingcart-table',
@@ -33,7 +35,8 @@ export class ShoppingcartTableComponent implements OnInit {
 
   constructor(
     private merchandiseservice: MerchandiseService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -113,5 +116,11 @@ export class ShoppingcartTableComponent implements OnInit {
           this.RenewShoppingCartRawData.emit();
         }
       });
+  }
+
+  checkingOut() {
+    this.dialog.open(CheckoutDialogComponent, {
+      data: this.shoppingCartData.ShoppingCartViewModels
+    });
   }
 }

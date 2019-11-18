@@ -69,6 +69,10 @@ import { SnackbarScaffoldComponent } from './components/snackbar/snackbar-scaffo
     }
   ],
   bootstrap: [AppComponent],
-  entryComponents: [LoginDialogComponent, SnackbarScaffoldComponent]
+  entryComponents: [
+    LoginDialogComponent,
+    SnackbarScaffoldComponent,
+    CheckoutDialogComponent
+  ]
 })
 export class AppModule {}
