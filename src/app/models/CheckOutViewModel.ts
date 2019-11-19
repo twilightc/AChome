@@ -1,10 +1,5 @@
 import { ShoppingCartViewModel } from './ShoppingCartModel';
 
-export class CityData {
-  City: string;
-  Village: AreaZip[];
-}
-
 export class AreaZip {
   Area: string;
   Zip: string;
@@ -27,7 +22,6 @@ export class CheckOutOrder {
   Merchandises: ShoppingCartViewModel[];
   Recipient = '';
   TransportId: number;
-  // ReceiveShopAddress = new AreaZip();
   ReceiveShop = new SevenElevenShopViewModel();
   ReceiverAddress = '';
   ReceiverPhone = '';

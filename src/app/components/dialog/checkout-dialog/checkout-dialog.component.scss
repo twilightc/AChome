@@ -1,17 +1,30 @@
 .mat-column-MerchandiseTitle {
-  max-width: 500px;
+  max-width: 650px;
 }
-// .mat-column-Spec1 .mat-column-Spec2 {
-//   padding: 0 5px;
-// }
-.mat-column-Spec1 {
+
+.mat-column-Spec1,
+.mat-column-Spec2,
+.mat-column-PurchaseQty,
+.mat-column-Price,
+.mat-column-TotalPrice {
   padding: 0 5px;
 }
 
-.mat-column-Spec2 {
-  padding: 0 5px;
-}
-
-.mat-column-PurchaseQty {
+.mat-column-PurchaseQty,
+.mat-column-Price,
+.mat-column-TotalPrice {
   text-align: right;
+}
+
+.recipient-form-field {
+  margin-left: 16px;
+}
+
+.receiveraddress-full-width {
+  max-width: 500px;
+  width: 100%;
+}
+
+.checkout-info span {
+  margin-right: 5px;
 }

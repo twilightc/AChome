@@ -20,3 +20,10 @@ body {
 .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
   border-color: #69f0ae !important;
 }
+
+.shop-address .mat-select-trigger {
+  min-width: 340px;
+}
+.shop-address .mat-form-field-underline {
+  min-width: 340px;
+}

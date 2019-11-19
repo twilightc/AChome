@@ -3,7 +3,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import {
   ShoppingCartWrapper,
-  ShoppingCartViewModel
+  ShoppingCartViewModel,
+  ShoppingCart
 } from 'src/app/models/ShoppingCartModel';
 import { RemoveShoppingCartItemModel } from 'src/app/models/RemoveShoppingCartItemModel';
 import { MerchandiseService } from 'src/app/services/merchandise.service';
@@ -80,8 +81,6 @@ export class ShoppingcartTableComponent implements OnInit {
   }
 
   checkChanged(cart: ShoppingCartViewModel) {
-    console.log(this.selection);
-
     this.selection.toggle(cart);
   }
 
@@ -119,8 +118,14 @@ export class ShoppingcartTableComponent implements OnInit {
   }
 
   checkingOut() {
-    this.dialog.open(CheckoutDialogComponent, {
-      data: this.shoppingCartData.ShoppingCartViewModels
-    });
+    if (this.selection.isEmpty()) {
+      this.dialog.open(CheckoutDialogComponent, {
+        data: this.shoppingCartData.ShoppingCartViewModels
+      });
+    } else {
+      this.dialog.open(CheckoutDialogComponent, {
+        data: this.selection.selected
+      });
+    }
   }
 }

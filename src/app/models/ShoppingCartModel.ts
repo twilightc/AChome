@@ -3,6 +3,7 @@ export class ShoppingCart {
   ProdId: string;
   SpecId: number;
   PurchaseQty: number;
+  // TotalPrice: number;
   AddTime?: Date;
 }
 
