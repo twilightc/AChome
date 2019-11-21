@@ -3,10 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { BaseResponse } from '../Models/Models';
 import { environment } from 'src/environments/environment.prod';
 import {
-  CityData,
   SevenElevenShopViewModel,
   TransportMethodViewModel,
-  AreaZip
+  AreaZip,
+  CheckOutOrder
 } from '../models/CheckOutViewModel';
 
 @Injectable({
@@ -30,6 +30,13 @@ export class CheckOutService {
   GetTaiwanCityList() {
     return this.httpclient.get<BaseResponse<Map<string, AreaZip[]>>>(
       `${environment.apiUrl}Checkout/GetTaiwanCityList`
+    );
+  }
+
+  CheckingOut(checkorder: CheckOutOrder) {
+    return this.httpclient.post<BaseResponse<boolean>>(
+      `${environment.apiUrl}Checkout/CheckingOut`,
+      checkorder
     );
   }
 }

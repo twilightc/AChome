@@ -1,4 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  OnDestroy
+} from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import {
@@ -6,19 +13,21 @@ import {
   ShoppingCartViewModel,
   ShoppingCart
 } from 'src/app/models/ShoppingCartModel';
-import { RemoveShoppingCartItemModel } from 'src/app/models/RemoveShoppingCartItemModel';
+import { PendedShoppingCartItemModel } from 'src/app/models/RemoveShoppingCartItemModel';
 import { MerchandiseService } from 'src/app/services/merchandise.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackbarScaffoldComponent } from '../snackbar/snackbar-scaffold/snackbar-scaffold.component';
 import { MatDialog } from '@angular/material/dialog';
 import { CheckoutDialogComponent } from '../dialog/checkout-dialog/checkout-dialog.component';
+import { Response } from 'selenium-webdriver/http';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-shoppingcart-table',
   templateUrl: './shoppingcart-table.component.html',
   styleUrls: ['./shoppingcart-table.component.scss']
 })
-export class ShoppingcartTableComponent implements OnInit {
+export class ShoppingcartTableComponent implements OnInit, OnDestroy {
   displayedColumns = [
     'select',
     'MerchandiseTitle',
@@ -31,6 +40,7 @@ export class ShoppingcartTableComponent implements OnInit {
   shoppingCartDataSource: MatTableDataSource<ShoppingCartViewModel>;
   selection = new SelectionModel<ShoppingCartViewModel>(true, []);
   shoppingCartData: ShoppingCartWrapper;
+  unSubscribe: Subscription[] = [];
   @Input() shoppingCartRawData: ShoppingCartWrapper;
   @Output() RenewShoppingCartRawData = new EventEmitter();
 
@@ -46,6 +56,10 @@ export class ShoppingcartTableComponent implements OnInit {
     this.shoppingCartDataSource = new MatTableDataSource<ShoppingCartViewModel>(
       this.shoppingCartData.ShoppingCartViewModels
     );
+  }
+
+  ngOnDestroy(): void {
+    this.unSubscribe.forEach(data => data.unsubscribe());
   }
 
   isAllSelected() {
@@ -87,7 +101,7 @@ export class ShoppingcartTableComponent implements OnInit {
   deleteItem() {
     // console.log(this.selection.selected);
 
-    const removedItemsInCart: RemoveShoppingCartItemModel[] = this.selection.selected.map(
+    const removedItemsInCart: PendedShoppingCartItemModel[] = this.selection.selected.map(
       data => {
         console.log(data);
 
@@ -118,14 +132,21 @@ export class ShoppingcartTableComponent implements OnInit {
   }
 
   checkingOut() {
+    let checkingoutData: ShoppingCartViewModel[];
     if (this.selection.isEmpty()) {
-      this.dialog.open(CheckoutDialogComponent, {
-        data: this.shoppingCartData.ShoppingCartViewModels
-      });
+      checkingoutData = this.shoppingCartData.ShoppingCartViewModels;
     } else {
-      this.dialog.open(CheckoutDialogComponent, {
-        data: this.selection.selected
-      });
+      checkingoutData = this.selection.selected;
     }
+    const dialogRef = this.dialog.open(CheckoutDialogComponent, {
+      data: checkingoutData
+    });
+    const renew = dialogRef.componentInstance.renewEvent.subscribe(() => {
+      this.RenewShoppingCartRawData.emit();
+    });
+    const sub = dialogRef.afterClosed().subscribe(() => {
+      renew.unsubscribe();
+    });
+    this.unSubscribe.push(sub);
   }
 }

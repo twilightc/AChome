@@ -1,11 +1,22 @@
-import { Component, OnInit, InjectionToken, Inject } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  InjectionToken,
+  Inject,
+  Output,
+  EventEmitter
+} from '@angular/core';
 import {
   ShoppingCartWrapper,
   ShoppingCartViewModel,
   ShoppingCart
 } from 'src/app/models/ShoppingCartModel';
 import { MerchandiseService } from 'src/app/services/merchandise.service';
-import { MatDialogConfig, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {
+  MatDialogConfig,
+  MAT_DIALOG_DATA,
+  MatDialogRef
+} from '@angular/material/dialog';
 import { CheckOutService } from 'src/app/services/check-out.service';
 import {
   SevenElevenShopViewModel,
@@ -15,14 +26,19 @@ import {
 } from 'src/app/models/CheckOutViewModel';
 import {
   Validators,
+  FormGroup,
   FormControl,
   FormGroupDirective,
-  NgForm
+  NgForm,
+  FormBuilder
 } from '@angular/forms';
 import {
   ErrorStateMatcher,
   MatOptionSelectionChange
 } from '@angular/material/core';
+import { PendedShoppingCartItemModel } from 'src/app/models/RemoveShoppingCartItemModel';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnackbarScaffoldComponent } from '../../snackbar/snackbar-scaffold/snackbar-scaffold.component';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -31,6 +47,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
     form: FormGroupDirective | NgForm | null
   ): boolean {
     const isSubmitted = form && form.submitted;
+
     return !!(
       control &&
       control.invalid &&
@@ -53,7 +70,6 @@ export class CheckoutDialogComponent implements OnInit {
   twCityList: Map<string, AreaZip[]>;
   receiveShopAddress = new AreaZip();
   checkingoutSevenElevenShop = new SevenElevenShopViewModel();
-  checkingOutData: ShoppingCart[];
   displayedColumns = [
     'MerchandiseTitle',
     'Spec1',
@@ -63,10 +79,14 @@ export class CheckoutDialogComponent implements OnInit {
     'TotalPrice'
   ];
   checkoutOrder = new CheckOutOrder();
-  fee = 0;
+  transportMethod = new TransportMethodViewModel();
+  @Output() renewEvent = new EventEmitter();
+
   constructor(
     @Inject(MAT_DIALOG_DATA) private currentData: ShoppingCartViewModel[],
-    private checkoutservice: CheckOutService
+    public dialogRef: MatDialogRef<CheckoutDialogComponent>,
+    private checkoutservice: CheckOutService,
+    private snackBar: MatSnackBar
   ) {}
   ngOnInit() {
     this.shoppingCartData = this.currentData;
@@ -74,19 +94,19 @@ export class CheckoutDialogComponent implements OnInit {
       if (response.Success) {
         // console.log('response.Data', response.Data);
         this.twCityList = response.Data;
-        console.log(this.twCityList);
+        // console.log(this.twCityList);
       }
     });
     this.checkoutservice.GetSevenElevenShop().subscribe(response => {
       if (response.Success) {
         this.sevenElevenShopList = response.Data;
-        console.log('sevenElevenShopList', this.sevenElevenShopList);
+        // console.log('sevenElevenShopList', this.sevenElevenShopList);
       }
     });
     this.checkoutservice.GetTransportMethodList().subscribe(response => {
       if (response.Success) {
         this.transportMethodList = response.Data;
-        console.log('transportMethodList', this.transportMethodList);
+        // console.log('transportMethodList', this.transportMethodList);
       }
     });
   }
@@ -97,14 +117,10 @@ export class CheckoutDialogComponent implements OnInit {
     );
   }
 
-  setShopInfo(
-    $event: MatOptionSelectionChange,
-    shop: SevenElevenShopViewModel
-  ) {
-    if (!$event.isUserInput) {
-      return;
-    }
-    console.log($event);
+  setShopInfo() {
+    const shop = this.sevenElevenShopList.find(
+      data => data.Address === this.checkingoutSevenElevenShop.Address
+    );
 
     this.checkoutOrder.ReceiveShop.ShopNumber = shop.ShopNumber;
     this.checkoutOrder.ReceiveShop.ShopName = shop.ShopName;
@@ -112,23 +128,50 @@ export class CheckoutDialogComponent implements OnInit {
     this.checkoutOrder.ReceiverAddress = shop.Address;
   }
   TransportChange() {
-    const fee = this.transportMethodList.find(
+    const feeInfo = this.transportMethodList.find(
       a => a.TransportId === this.checkoutOrder.TransportId
     );
-    if (fee) {
-      this.fee = fee.Fee;
+
+    // console.log('fee', feeInfo);
+
+    if (feeInfo) {
+      this.transportMethod = feeInfo;
     }
   }
   getTotalCost() {
     return (
       this.shoppingCartData
         .map(data => data.PurchaseQty * data.Price)
-        .reduce((acc, value) => acc + value, 0) + this.fee
+        .reduce((acc, value) => acc + value, 0) +
+      (this.transportMethod.Fee ? this.transportMethod.Fee : 0)
     );
   }
-
   checkingout() {
-    console.log(this.checkoutOrder);
-    //
+    this.checkoutOrder.Merchandises = this.currentData.map(data => {
+      return {
+        Account: data.OwnerAccount,
+        ProdId: data.MerchandiseId,
+        SpecId: data.SpecId
+      };
+    });
+    if (this.checkoutOrder.ReceiveShop) {
+      this.checkoutOrder.ReceiveShop.Address = this.checkoutOrder.ReceiverAddress;
+    }
+
+    // console.log(this.checkoutOrder);
+    this.checkoutservice.CheckingOut(this.checkoutOrder).subscribe(response => {
+      if (response.Success) {
+        this.snackBar.openFromComponent(SnackbarScaffoldComponent, {
+          duration: 3000,
+          verticalPosition: 'top',
+          data: {
+            text: '訂單已送出',
+            textColor: '#1e90ff'
+          }
+        });
+        this.dialogRef.close();
+        this.renewEvent.emit();
+      }
+    });
   }
 }

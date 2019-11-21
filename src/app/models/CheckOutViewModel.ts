@@ -1,4 +1,5 @@
 import { ShoppingCartViewModel } from './ShoppingCartModel';
+import { PendedShoppingCartItemModel } from './RemoveShoppingCartItemModel';
 
 export class AreaZip {
   Area: string;
@@ -19,9 +20,9 @@ export class SevenElevenShopViewModel {
 }
 
 export class CheckOutOrder {
-  Merchandises: ShoppingCartViewModel[];
+  Merchandises: PendedShoppingCartItemModel[];
   Recipient = '';
-  TransportId: number;
+  TransportId = 0;
   ReceiveShop = new SevenElevenShopViewModel();
   ReceiverAddress = '';
   ReceiverPhone = '';

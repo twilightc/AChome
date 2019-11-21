@@ -10,7 +10,7 @@ import {
 import { ShoppingCart, ShoppingCartWrapper } from '../models/ShoppingCartModel';
 
 import { SearchRequestModel } from '../models/SearchRequestModel';
-import { RemoveShoppingCartItemModel } from '../models/RemoveShoppingCartItemModel';
+import { PendedShoppingCartItemModel } from '../models/RemoveShoppingCartItemModel';
 
 @Injectable({
   providedIn: 'root'
@@ -64,7 +64,7 @@ export class MerchandiseService {
   }
 
   RemoveShoppingCartItem(
-    removeshoppingcartttemmodel: RemoveShoppingCartItemModel[]
+    removeshoppingcartttemmodel: PendedShoppingCartItemModel[]
   ) {
     return this.httpclient.put<BaseResponse<boolean>>(
       `${environment.apiUrl}ShoppingCart/RemoveShoppingCartItem`,

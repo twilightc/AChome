@@ -1,9 +1,9 @@
 export class RemoveShoppingCartWrapper {
   Account: string;
-  RemoveShoppingCartItemModel: RemoveShoppingCartItemModel[];
+  RemoveShoppingCartItemModel: PendedShoppingCartItemModel[];
 }
 
-export class RemoveShoppingCartItemModel {
+export class PendedShoppingCartItemModel {
   Account: string;
   ProdId: string;
   SpecId: number;
