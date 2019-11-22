@@ -21,3 +21,8 @@ export class BaseResponse<T> {
   Msg: string;
   Data: T;
 }
+
+export class TokenBody {
+  Account: string;
+  UserName: string;
+}

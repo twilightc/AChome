@@ -18,7 +18,7 @@ import {
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { LoginDialogComponent } from '../dialog/login-dialog/login-dialog.component';
-import { AccountModel } from 'src/app/Models/Models';
+import { AccountModel, TokenBody } from 'src/app/Models/Models';
 import { UserService } from 'src/app/services/user.service';
 
 enum Direction {
@@ -53,6 +53,7 @@ export class HeaderComponent implements AfterViewInit, OnInit {
   private isVisible = true;
   searchValue = '';
   LoginAccount = new AccountModel();
+  userAfterLogin: TokenBody;
 
   constructor(
     private router: Router,
@@ -60,7 +61,12 @@ export class HeaderComponent implements AfterViewInit, OnInit {
     public dialog: MatDialog
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.loginservice.userNameTrigger.subscribe(response => {
+      const str = atob(localStorage.getItem('token').split('.')[1]);
+      this.userAfterLogin = JSON.parse(str);
+    });
+  }
 
   @HostBinding('@toggle')
   get toggle(): VisibilityState {

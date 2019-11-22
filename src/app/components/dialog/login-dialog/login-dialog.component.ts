@@ -29,11 +29,12 @@ export class LoginDialogComponent {
 
     this.loginservice.Login(this.account).subscribe(response => {
       if (response.Success) {
-        // console.log('success');
         this.loginservice.isLoggedIn = true;
 
         localStorage.setItem('token', response.Data);
-        // console.log(this.loginservice.account);
+        this.loginservice.userNameTrigger.next(
+          !this.loginservice.userNameTrigger.value
+        );
       }
       this.dialogRef.close();
     });

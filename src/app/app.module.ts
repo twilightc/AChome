@@ -28,6 +28,7 @@ import { AuthGuard } from './services/authGuard.service';
 import { ShoppingcartTableComponent } from './components/shoppingcart-table/shoppingcart-table.component';
 import { CheckoutDialogComponent } from './components/dialog/checkout-dialog/checkout-dialog.component';
 import { SnackbarScaffoldComponent } from './components/snackbar/snackbar-scaffold/snackbar-scaffold.component';
+import { EstablishedOrderComponent } from './pages/established-order/established-order.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,7 +51,8 @@ import { SnackbarScaffoldComponent } from './components/snackbar/snackbar-scaffo
     ShoppingCartComponent,
     ShoppingcartTableComponent,
     CheckoutDialogComponent,
-    SnackbarScaffoldComponent
+    SnackbarScaffoldComponent,
+    EstablishedOrderComponent
   ],
   imports: [
     BrowserModule,
