@@ -110,6 +110,10 @@ export class HeaderComponent implements AfterViewInit, OnInit {
     this.router.navigate(['/register']);
   }
 
+  toEstablishOrder() {
+    this.router.navigate(['/establish-order']);
+  }
+
   Logout() {
     console.log('logout');
     this.loginservice.isLoggedIn = false;

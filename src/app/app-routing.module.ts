@@ -4,12 +4,21 @@ import { MerchandiseDetailComponent } from './pages/merchandise-detail/merchandi
 import { MainComponent } from './pages/main/main.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { ShoppingCartComponent } from './pages/shopping-cart/shopping-cart.component';
+import { EstablishedOrderComponent } from './pages/established-order/established-order.component';
 
 const routes: Routes = [
   { path: 'detail', component: MerchandiseDetailComponent },
   { path: 'main', component: MainComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'shoppingCart', component: ShoppingCartComponent },
+  { path: 'establish-order', component: EstablishedOrderComponent },
+  {
+    path: 'newMain',
+    loadChildren: () =>
+      import('./modules/main-page/main-page.module').then(
+        res => res.MainPageModule
+      )
+  },
   { path: '**', redirectTo: 'main', pathMatch: 'full' }
 ];
 
