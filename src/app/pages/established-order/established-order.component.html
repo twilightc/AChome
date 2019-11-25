@@ -63,7 +63,15 @@
         >
           <ng-container matColumnDef="ProdName">
             <th mat-header-cell *matHeaderCellDef>品名</th>
-            <td mat-cell *matCellDef="let element">{{ element.ProdName }}</td>
+            <td mat-cell *matCellDef="let element">
+              <a
+                [routerLink]="['/detail', { ItemId: element.ProdId }]"
+                style="color:#ffffff; text-decoration: none;"
+                target="_blank"
+              >
+                {{ element.ProdName }}
+              </a>
+            </td>
           </ng-container>
 
           <ng-container matColumnDef="Spec1">
