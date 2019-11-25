@@ -12,6 +12,8 @@ import { MerchandiseService } from 'src/app/services/merchandise.service';
 import { SortTypeEnum, OrderTypeEnum } from 'src/app/models/SearchRequestModel';
 import { SearchEvent } from 'src/app/models/EventModels';
 import { of, BehaviorSubject } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-search-region',
@@ -22,6 +24,9 @@ export class SearchRegionComponent implements OnInit, OnDestroy {
   SortTypeEnum = SortTypeEnum;
   OrderTypeEnum = OrderTypeEnum;
   searchName = '';
+  sortType = SortTypeEnum.None;
+  orderType = OrderTypeEnum.None;
+
   @Input() merchandiseList = new Array<MerchandiseViewModel>();
   @Output() RenewListBySearching = new EventEmitter<SearchEvent>();
   // @Output() Sort = new EventEmitter<number>();
@@ -29,12 +34,29 @@ export class SearchRegionComponent implements OnInit, OnDestroy {
     new SearchEvent(this.searchName, SortTypeEnum.None, OrderTypeEnum.None)
   );
 
-  constructor() {}
+  constructor(private activateroute: ActivatedRoute) {}
 
   ngOnInit() {
-    this.searchCommand.subscribe(result => {
-      console.log(result);
+    this.activateroute.paramMap
+      .pipe(
+        switchMap(params =>
+          of([
+            params.get('SortType'),
+            params.get('Keyword'),
+            params.get('OrderType')
+          ])
+        )
+      )
+      .subscribe(data => {
+        this.sortType = SortTypeEnum[data[0]];
+        this.searchName = data[1];
+        this.orderType = OrderTypeEnum[data[2]];
 
+        this.searchCommand.next(
+          new SearchEvent(this.searchName, +data[0], +data[2])
+        );
+      });
+    this.searchCommand.subscribe(result => {
       this.RenewListBySearching.emit(result);
     });
   }
@@ -51,6 +73,12 @@ export class SearchRegionComponent implements OnInit, OnDestroy {
         this.searchCommand.value.orderType
       )
     );
+  }
+
+  fat() {
+    console.log(this.orderType, this.orderType === OrderTypeEnum.Desc);
+
+    return this.orderType === OrderTypeEnum.Desc;
   }
 
   OrderBy(OrderType: OrderTypeEnum) {

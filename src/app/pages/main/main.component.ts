@@ -47,7 +47,7 @@ export class MainComponent implements OnInit {
         )
       )
       .subscribe(data => {
-        console.log('999', data);
+        console.log('searchRequestModel', data);
 
         this.searchRequestModel.CategoryId = data[0];
         this.searchRequestModel.CategoryDetailId = data[1];
@@ -78,6 +78,8 @@ export class MainComponent implements OnInit {
   }
 
   RenewListBySearching(searchEvent: SearchEvent) {
+    // console.log(searchEvent);
+
     this.router.navigate([
       'main',
       {

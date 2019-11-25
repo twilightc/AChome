@@ -1,38 +1,49 @@
 <div class="search-bar">
-  <div>
+  <div style="position:relative">
     <input
       type="text"
-      placeholder="輸入搜尋項目"
+      placeholder="輸入搜尋商品"
       [(ngModel)]="searchName"
       class="search-input"
     />
-  </div>
-  <div>
     <button
-      mat-raised-button
-      style="background-color: #616161;margin-left: 10px"
-      (click)="Search()"
+      style="position: absolute;right: 0px;bottom:0px"
+      mat-button
+      *ngIf="searchName"
+      matSuffix
+      mat-icon-button
+      aria-label="Clear"
+      (click)="searchName = ''"
     >
-      搜尋
+      <mat-icon>close</mat-icon>
     </button>
   </div>
+  <!-- <div> -->
+  <button
+    mat-raised-button
+    style="background-color: #616161;margin-left: 10px"
+    (click)="Search()"
+  >
+    搜尋
+  </button>
+  <!-- </div> -->
 </div>
 <div class="btn-region">
   <div class="sort-button">
     <p style="display: inline-block">排序方式</p>
-    <mat-button-toggle-group #group="matButtonToggleGroup">
+    <mat-button-toggle-group #group="matButtonToggleGroup" [(value)]="sortType">
       <mat-button-toggle value="left" aria-label="Text align left">
         <span>日期</span>
       </mat-button-toggle>
       <mat-button-toggle
-        value="right"
+        value="Price"
         aria-label="Text align right"
         (click)="SortBy(SortTypeEnum.Price)"
       >
         <span>價格</span>
       </mat-button-toggle>
       <mat-button-toggle
-        value="center"
+        value="SoldQty"
         aria-label="Text align center"
         (click)="SortBy(SortTypeEnum.SoldQty)"
       >
@@ -41,16 +52,19 @@
     </mat-button-toggle-group>
   </div>
   <div class="order-button">
-    <mat-button-toggle-group #group="matButtonToggleGroup">
+    <mat-button-toggle-group
+      #group="matButtonToggleGroup"
+      [(value)]="orderType"
+    >
       <mat-button-toggle
-        value="right"
+        value="Asc"
         aria-label="Text align right"
         (click)="OrderBy(OrderTypeEnum.Asc)"
       >
         <span>升序</span>
       </mat-button-toggle>
       <mat-button-toggle
-        value="center"
+        value="Desc"
         aria-label="Text align center"
         (click)="OrderBy(OrderTypeEnum.Desc)"
       >

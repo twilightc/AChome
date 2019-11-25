@@ -2,14 +2,11 @@
   <div class="headertitle">
     <a class="headeranchor" [routerLink]="['/main']">AChome</a>
 
-    <mat-form-field class="header-search-field">
-      <input
-        matInput
-        type="text"
-        placeholder="Search Item Name.."
-        [(ngModel)]="searchValue"
-      />
+    <!-- <mat-form-field class="header-search-field"> -->
+    <div style="position: relative;">
+      <input type="text" [(ngModel)]="searchValue" class="search-input" />
       <button
+        style="position: absolute;right: 0px;bottom: -3px;"
         mat-button
         *ngIf="searchValue"
         matSuffix
@@ -19,7 +16,8 @@
       >
         <mat-icon>close</mat-icon>
       </button>
-    </mat-form-field>
+    </div>
+    <!-- </mat-form-field> -->
     <button mat-icon-button color="primary">
       <mat-icon>search</mat-icon>
     </button>
@@ -47,15 +45,15 @@
         <button mat-menu-item style="position: relative;">
           <a [routerLink]="['/shoppingCart']" style="text-decoration: none;">
             <span class="menu-text linkbtn">
-              購物車<mat-icon>shopping_cart</mat-icon>
+              <mat-icon>shopping_cart</mat-icon>購物車
             </span>
           </a>
         </button>
         <button mat-menu-item (click)="toEstablishOrder()">
-          <span class="menu-text">已成立訂單</span> <mat-icon>subject</mat-icon>
+          <span class="menu-text"> <mat-icon>subject</mat-icon>已成立訂單</span>
         </button>
         <button mat-menu-item (click)="Logout()">
-          <span class="menu-text">登出</span> <mat-icon>exit_to_app</mat-icon>
+          <span class="menu-text"><mat-icon>exit_to_app</mat-icon>登出</span>
         </button>
       </mat-menu>
     </ng-template>
