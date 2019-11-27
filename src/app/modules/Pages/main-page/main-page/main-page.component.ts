@@ -1,26 +1,23 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { MerchandiseService } from 'src/app/services/merchandise.service';
-import {
-  MerchandiseViewModel,
-  MerchandiseWrapper
-} from 'src/app/models/CategoryListViewModel';
+import { Component, OnInit } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { ActivatedRoute, Router } from '@angular/router';
-import { of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { MerchandiseWrapper } from 'src/app/models/CategoryListViewModel';
 import {
   SearchRequestModel,
   SortTypeEnum,
   OrderTypeEnum
 } from 'src/app/models/SearchRequestModel';
+import { MerchandiseService } from 'src/app/services/merchandise.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
+import { of } from 'rxjs';
 import { SearchEvent } from 'src/app/models/EventModels';
 
 @Component({
-  selector: 'app-main',
-  templateUrl: './main.component.html',
-  styleUrls: ['./main.component.scss']
+  selector: 'app-main-page',
+  templateUrl: './main-page.component.html',
+  styleUrls: ['./main-page.component.scss']
 })
-export class MainComponent implements OnInit {
+export class MainPageComponent implements OnInit {
   paginator: MatPaginator;
   merchandiseWrapper = new MerchandiseWrapper();
   searchRequestModel = new SearchRequestModel();

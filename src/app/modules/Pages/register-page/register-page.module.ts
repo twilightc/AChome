@@ -14,4 +14,4 @@ import { ShareMaterialModule } from '../../share-material/share-material.module'
     ShareMaterialModule
   ]
 })
-export class RegisterPageModule { }
+export class RegisterPageModule {}

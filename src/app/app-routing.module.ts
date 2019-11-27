@@ -1,26 +1,36 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { MerchandiseDetailComponent } from './pages/merchandise-detail/merchandise-detail.component';
-import { MainComponent } from './pages/main/main.component';
-import { RegisterComponent } from './pages/register/register.component';
-import { ShoppingCartComponent } from './pages/shopping-cart/shopping-cart.component';
-import { EstablishedOrderComponent } from './pages/established-order/established-order.component';
-
 const routes: Routes = [
-  { path: 'detail', component: MerchandiseDetailComponent },
-  { path: 'main', component: MainComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'shoppingCart', component: ShoppingCartComponent },
-  { path: 'establish-order', component: EstablishedOrderComponent },
   {
-    path: 'new-register',
+    path: 'establish-order',
+    loadChildren: () =>
+      import(
+        './modules/Pages/established-order-page/established-order-page.module'
+      ).then(res => res.EstablishedOrderPageModule)
+  },
+  {
+    path: 'shopping-cart',
+    loadChildren: () =>
+      import(
+        './modules/Pages/shopping-cart-page/shopping-cart-page.module'
+      ).then(res => res.ShoppingCartPageModule)
+  },
+  {
+    path: 'detail',
+    loadChildren: () =>
+      import(
+        './modules/Pages/merchandise-detail/merchandise-detail.module'
+      ).then(res => res.MerchandiseDetailModule)
+  },
+  {
+    path: 'register',
     loadChildren: () =>
       import('./modules/Pages/register-page/register-page.module').then(
         res => res.RegisterPageModule
       )
   },
   {
-    path: 'new-main',
+    path: 'main',
     loadChildren: () =>
       import('./modules/Pages/main-page/main-page.module').then(
         res => res.MainPageModule
