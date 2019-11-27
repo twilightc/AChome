@@ -1,0 +1,7 @@
+<div class="root">
+  <app-shoppingcart-table
+    [shoppingCartRawData]="data"
+    *ngFor="let data of shoppingCartWrapper"
+    (RenewShoppingCartRawData)="RenewShoppingCartRawData()"
+  ></app-shoppingcart-table>
+</div>

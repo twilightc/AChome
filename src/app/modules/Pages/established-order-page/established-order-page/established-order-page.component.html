@@ -1,0 +1,126 @@
+<div class="title">
+  <div>已成立訂單</div>
+</div>
+<table
+  mat-table
+  [dataSource]="dataSource"
+  multiTemplateDataRows
+  class="mat-elevation-z8"
+>
+  <!-- display data by loop -->
+  <!-- <ng-container
+    matColumnDef="{{ column }}"
+    *ngFor="let column of columnsToDisplay; let i = index"
+  >
+    <th mat-header-cell *matHeaderCellDef>{{ getName(i) }}</th>
+    <td mat-cell *matCellDef="let element">
+      {{
+        i === 2 || i === 3
+          ? (element[column] | currency: 'TWD':'symbol-narrow':'1.0-0')
+          : element[column]
+      }}
+    </td>
+  </ng-container> -->
+
+  <ng-container matColumnDef="OrderingTime">
+    <th mat-header-cell *matHeaderCellDef>購買時間</th>
+    <td mat-cell *matCellDef="let orderData">{{ orderData.OrderingTime }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="SellerAccount">
+    <th mat-header-cell *matHeaderCellDef>賣家</th>
+    <td mat-cell *matCellDef="let orderData">{{ orderData.SellerAccount }}</td>
+  </ng-container>
+  <ng-container matColumnDef="AdditionalFee">
+    <th mat-header-cell *matHeaderCellDef>運費</th>
+    <td mat-cell *matCellDef="let orderData">
+      {{ orderData.AdditionalFee | currency: 'TWD':'symbol-narrow':'1.0-0' }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="TotalPrice">
+    <th mat-header-cell *matHeaderCellDef>總價格</th>
+    <td mat-cell *matCellDef="let orderData">
+      {{ orderData.TotalPrice | currency: 'TWD':'symbol-narrow':'1.0-0' }}
+    </td>
+  </ng-container>
+
+  <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+  <ng-container matColumnDef="expandedDetail">
+    <td
+      mat-cell
+      *matCellDef="let element"
+      [attr.colspan]="columnsToDisplay.length"
+    >
+      <div
+        class="example-element-detail"
+        [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'"
+      >
+        <table
+          mat-table
+          [dataSource]="element.OrderDetails"
+          class="mat-elevation-z8"
+        >
+          <ng-container matColumnDef="ProdName">
+            <th mat-header-cell *matHeaderCellDef>品名</th>
+            <td mat-cell *matCellDef="let element">
+              <a
+                [routerLink]="['/detail', { ItemId: element.ProdId }]"
+                style="color:#ffffff; text-decoration: none;"
+                target="_blank"
+              >
+                {{ element.ProdName }}
+              </a>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Spec1">
+            <th mat-header-cell *matHeaderCellDef>規格1</th>
+            <td mat-cell *matCellDef="let element">{{ element.Spec1 }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="Spec2">
+            <th mat-header-cell *matHeaderCellDef>規格2</th>
+            <td mat-cell *matCellDef="let element">{{ element.Spec2 }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="Price">
+            <th mat-header-cell *matHeaderCellDef>價格</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.Price | currency: 'TWD':'symbol-narrow':'1.0-0' }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Qty">
+            <th mat-header-cell *matHeaderCellDef>數量</th>
+            <td mat-cell *matCellDef="let element">{{ element.Qty }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="MinorTotal">
+            <th mat-header-cell *matHeaderCellDef>小計</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.MinorTotal | currency: 'TWD':'symbol-narrow':'1.0-0' }}
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="innerColumn"></tr>
+          <tr mat-row *matRowDef="let row; columns: innerColumn"></tr>
+        </table>
+      </div>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+  <tr
+    mat-row
+    *matRowDef="let element; columns: columnsToDisplay"
+    class="example-element-row"
+    [class.example-expanded-row]="expandedElement === element"
+    (click)="expandedElement = expandedElement === element ? null : element"
+  ></tr>
+  <tr
+    mat-row
+    *matRowDef="let row; columns: ['expandedDetail']"
+    class="example-detail-row"
+  ></tr>
+</table>
