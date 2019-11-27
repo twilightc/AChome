@@ -31,11 +31,14 @@ export class LoginDialogComponent {
       if (response.Success) {
         this.loginservice.isLoggedIn = true;
 
+        console.log(!this.loginservice.userNameTrigger.value);
         localStorage.setItem('token', response.Data);
         this.loginservice.userNameTrigger.next(
           !this.loginservice.userNameTrigger.value
         );
       }
+      console.log('login?');
+
       this.dialogRef.close();
     });
   }
