@@ -24,11 +24,9 @@
   </div>
   <div class="headerbtn">
     <ng-container *ngIf="!loginservice.isLoggedIn; else elseTemplate">
-      <a class="headeranchor" [routerLink]="['/new-register']">SiupUp</a>
-      <!-- <button mat-button (click)="toRegister()">
-        
+      <button mat-button (click)="toRegister()">
         Sign Up
-      </button> -->
+      </button>
       <button mat-button (click)="openDialog()">
         Sign In
       </button>
@@ -45,7 +43,7 @@
       <button mat-button [matMenuTriggerFor]="menu">選單</button>
       <mat-menu #menu="matMenu">
         <button mat-menu-item style="position: relative;">
-          <a [routerLink]="['/shoppingCart']" style="text-decoration: none;">
+          <a [routerLink]="['/shopping-cart']" style="text-decoration: none;">
             <span class="menu-text linkbtn">
               <mat-icon>shopping_cart</mat-icon>購物車
             </span>

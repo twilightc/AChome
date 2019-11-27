@@ -114,21 +114,23 @@ export class ShoppingcartTableComponent implements OnInit, OnDestroy {
     );
     console.log(removedItemsInCart);
 
-    this.merchandiseservice
-      .RemoveShoppingCartItem(removedItemsInCart)
-      .subscribe(response => {
-        if (response.Success) {
-          this.snackBar.openFromComponent(SnackbarScaffoldComponent, {
-            duration: 3000,
-            verticalPosition: 'top',
-            data: {
-              text: '商品已從購物車移除',
-              textColor: '#32cd32'
-            }
-          });
-          this.RenewShoppingCartRawData.emit();
-        }
-      });
+    if (removedItemsInCart.length !== 0) {
+      this.merchandiseservice
+        .RemoveShoppingCartItem(removedItemsInCart)
+        .subscribe(response => {
+          if (response.Success) {
+            this.snackBar.openFromComponent(SnackbarScaffoldComponent, {
+              duration: 3000,
+              verticalPosition: 'top',
+              data: {
+                text: '商品已從購物車移除',
+                textColor: '#32cd32'
+              }
+            });
+            this.RenewShoppingCartRawData.emit();
+          }
+        });
+    }
   }
 
   checkingOut() {

@@ -1,0 +1,111 @@
+:host {
+  width: 100%;
+  max-width: 1500px;
+  // height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+  align-items: center;
+}
+
+:host div {
+  display: flex;
+}
+
+.detail-body {
+  flex-direction: row;
+}
+
+.price-body {
+  flex-direction: column;
+  padding-left: 30px;
+  justify-content: space-evenly;
+}
+
+.amount-btn {
+  flex-flow: row nowrap;
+  width: 50%;
+  padding-left: 10px;
+}
+
+.mt20 {
+  margin-top: 20px;
+}
+
+.ml10 {
+  margin-left: 10px;
+}
+
+.countbtn-left {
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  min-width: 36px;
+}
+
+.countbtn-right {
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  min-width: 36px;
+}
+
+.image-container {
+  min-height: 400px;
+  max-height: 400px;
+  height: 400px;
+  min-width: 400px;
+  max-width: 400px;
+  width: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.product-image {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+}
+.price-body > div {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.num-part {
+  margin-left: 40px;
+}
+
+.radio-group {
+  flex-direction: row;
+}
+
+.radio-button {
+  padding-right: 5px;
+}
+
+.item-info {
+  width: 100%;
+  max-width: 1200px;
+  height: 100%;
+  min-height: 300px;
+  background-color: #fbd475;
+  margin-bottom: 0px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.item-info > div {
+  padding: 15px;
+}
+
+.qa-part {
+  width: 90%;
+  flex-direction: column;
+  // align-items: center;
+  background-color: #fff;
+  border-radius: 5px;
+  margin: 10px;
+}
+
+.qa-question {
+  flex-direction: column;
+}

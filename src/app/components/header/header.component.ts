@@ -52,7 +52,6 @@ enum VisibilityState {
 export class HeaderComponent implements AfterViewInit, OnInit {
   private isVisible = true;
   searchName = '';
-  LoginAccount = new AccountModel();
   userAfterLogin: TokenBody;
 
   constructor(
@@ -63,8 +62,11 @@ export class HeaderComponent implements AfterViewInit, OnInit {
 
   ngOnInit() {
     this.loginservice.userNameTrigger.subscribe(response => {
-      const str = atob(localStorage.getItem('token').split('.')[1]);
-      this.userAfterLogin = JSON.parse(str);
+      const temp = localStorage.getItem('token');
+      if (temp) {
+        const str = atob(temp.split('.')[1]);
+        this.userAfterLogin = JSON.parse(str);
+      }
     });
   }
 
@@ -96,13 +98,11 @@ export class HeaderComponent implements AfterViewInit, OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(LoginDialogComponent, {
-      width: '350px',
-      data: { loginaccount: this.LoginAccount }
+      width: '350px'
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.LoginAccount = result;
+      console.log('The dialog was closed:');
     });
   }
 
