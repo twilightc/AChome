@@ -4,29 +4,31 @@
 
     <!-- <mat-form-field class="header-search-field"> -->
     <div style="position: relative;">
-      <input type="text" [(ngModel)]="searchValue" class="search-input" />
+      <input type="text" [(ngModel)]="searchName" class="search-input" />
       <button
         style="position: absolute;right: 0px;bottom: -3px;"
         mat-button
-        *ngIf="searchValue"
+        *ngIf="searchName"
         matSuffix
         mat-icon-button
         aria-label="Clear"
-        (click)="searchValue = ''"
+        (click)="searchName = ''"
       >
         <mat-icon>close</mat-icon>
       </button>
     </div>
     <!-- </mat-form-field> -->
-    <button mat-icon-button color="primary">
+    <button mat-icon-button color="primary" (click)="searchByHeader()">
       <mat-icon>search</mat-icon>
     </button>
   </div>
   <div class="headerbtn">
     <ng-container *ngIf="!loginservice.isLoggedIn; else elseTemplate">
-      <button mat-button (click)="toRegister()">
+      <a class="headeranchor" [routerLink]="['/new-register']">SiupUp</a>
+      <!-- <button mat-button (click)="toRegister()">
+        
         Sign Up
-      </button>
+      </button> -->
       <button mat-button (click)="openDialog()">
         Sign In
       </button>

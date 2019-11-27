@@ -51,7 +51,7 @@ enum VisibilityState {
 })
 export class HeaderComponent implements AfterViewInit, OnInit {
   private isVisible = true;
-  searchValue = '';
+  searchName = '';
   LoginAccount = new AccountModel();
   userAfterLogin: TokenBody;
 
@@ -104,6 +104,10 @@ export class HeaderComponent implements AfterViewInit, OnInit {
       console.log('The dialog was closed');
       this.LoginAccount = result;
     });
+  }
+
+  searchByHeader() {
+    this.router.navigate(['main', { Keyword: this.searchName }]);
   }
 
   toRegister() {

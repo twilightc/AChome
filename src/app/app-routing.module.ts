@@ -13,9 +13,16 @@ const routes: Routes = [
   { path: 'shoppingCart', component: ShoppingCartComponent },
   { path: 'establish-order', component: EstablishedOrderComponent },
   {
-    path: 'newMain',
+    path: 'new-register',
     loadChildren: () =>
-      import('./modules/main-page/main-page.module').then(
+      import('./modules/Pages/register-page/register-page.module').then(
+        res => res.RegisterPageModule
+      )
+  },
+  {
+    path: 'new-main',
+    loadChildren: () =>
+      import('./modules/Pages/main-page/main-page.module').then(
         res => res.MainPageModule
       )
   },

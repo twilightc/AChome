@@ -19,7 +19,7 @@ import { MatSelectModule } from '@angular/material/select';
 @NgModule({
   declarations: [],
   imports: [
-    BrowserModule,
+    // BrowserModule,
     MatIconModule,
     MatButtonModule,
     MatInputModule,

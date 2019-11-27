@@ -75,12 +75,6 @@ export class SearchRegionComponent implements OnInit, OnDestroy {
     );
   }
 
-  fat() {
-    console.log(this.orderType, this.orderType === OrderTypeEnum.Desc);
-
-    return this.orderType === OrderTypeEnum.Desc;
-  }
-
   OrderBy(OrderType: OrderTypeEnum) {
     this.searchCommand.next(
       new SearchEvent(
