@@ -12,13 +12,15 @@ import { AuthInterceptor } from './auth/auth.Interceptor';
 import { AuthGuard } from './services/authGuard.service';
 import { CheckoutDialogComponent } from './components/dialog/checkout-dialog/checkout-dialog.component';
 import { SnackbarScaffoldComponent } from './components/snackbar/snackbar-scaffold/snackbar-scaffold.component';
+import { InputRainbowDirective } from './directives/input-rainbow.directive';
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     LoginDialogComponent,
     CheckoutDialogComponent,
-    SnackbarScaffoldComponent
+    SnackbarScaffoldComponent,
+    InputRainbowDirective
   ],
   imports: [
     BrowserModule,
