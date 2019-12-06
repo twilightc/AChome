@@ -9,6 +9,7 @@ import { MerchandiseService } from 'src/app/services/merchandise.service';
 import { UserService } from 'src/app/services/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackbarScaffoldComponent } from 'src/app/components/snackbar/snackbar-scaffold/snackbar-scaffold.component';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-merchandise-detail',
@@ -36,7 +37,7 @@ export class MerchandiseDetailComponent implements OnInit {
       .subscribe(data => {
         this.merchandiseservice.GetMerchandise(data[0]).subscribe(response => {
           this.merchandise = response.Data;
-          this.merchandise.ImagePath = `http://localhost:50390/img/${this.merchandise.ImagePath}`;
+          this.merchandise.ImagePath = `${environment.imgUrl}/${this.merchandise.ImagePath}`;
 
           this.merchandise.MerchandiseSpec.forEach(specData => {
             if (!specData.Enable) {

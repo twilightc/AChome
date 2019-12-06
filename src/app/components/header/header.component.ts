@@ -21,12 +21,12 @@ import { LoginDialogComponent } from '../dialog/login-dialog/login-dialog.compon
 import { AccountModel, TokenBody } from 'src/app/Models/Models';
 import { UserService } from 'src/app/services/user.service';
 
-enum Direction {
+export enum Direction {
   Up = 'Up',
   Down = 'Down'
 }
 
-enum VisibilityState {
+export enum VisibilityState {
   Visible = 'visible',
   Hidden = 'hidden'
 }

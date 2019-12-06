@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { MerchandiseViewModel } from 'src/app/models/CategoryListViewModel';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-item-card',
@@ -14,6 +15,6 @@ export class ItemCardComponent implements OnInit {
 
   ngOnInit() {
     this.merchandiseInfo = this.merchandise;
-    this.merchandiseInfo.ImagePath = `http://localhost:50390/img/${this.merchandise.ImagePath}`;
+    this.merchandiseInfo.ImagePath = `${environment.imgUrl}/${this.merchandise.ImagePath}`;
   }
 }

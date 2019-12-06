@@ -44,7 +44,7 @@ export class MainPageComponent implements OnInit {
         )
       )
       .subscribe(data => {
-        console.log('searchRequestModel', data);
+        // console.log('searchRequestModel', data);
 
         this.searchRequestModel.CategoryId = data[0];
         this.searchRequestModel.CategoryDetailId = data[1];

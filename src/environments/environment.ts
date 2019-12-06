@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:50390/api/'
+  // apiUrl: 'http://localhost:50390/api/'
+  apiUrl: 'http://localhost:50390/api/',
+  imgUrl: 'http://localhost:50390/img'
 };
 
 /*

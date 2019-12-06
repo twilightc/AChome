@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BaseResponse } from '../Models/Models';
-import { environment } from 'src/environments/environment.prod';
+import { environment } from 'src/environments/environment';
 import {
   CategoryListViewModel,
   MerchandiseViewModel,
@@ -32,6 +32,8 @@ export class MerchandiseService {
   }
 
   GetMerchandiseListBySearching(searchRequestModel: SearchRequestModel) {
+    console.log('environment.apiUrl', environment.production);
+
     return this.httpclient.post<BaseResponse<MerchandiseWrapper>>(
       `${environment.apiUrl}Merchandise/GetMerchandiseListBySearching`,
       searchRequestModel
