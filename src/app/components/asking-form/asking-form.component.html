@@ -1,0 +1,20 @@
+<!-- <form class="example-form">
+  <mat-form-field class="example-full-width">
+    <textarea matInput placeholder="Leave a comment"></textarea>
+  </mat-form-field>
+</form> -->
+<div class="asking-form">
+  <mat-form-field class="example-full-width">
+    <mat-placeholder class="placeholder">寫點意見給賣家吧...</mat-placeholder>
+    <textarea matInput [(ngModel)]="question"></textarea>
+  </mat-form-field>
+  <div style="display: flex; width:100%;justify-content: center;">
+    <button class="ml10" mat-raised-button style="background-color: #e21c00" (click)="deliverForm()">
+      送出問題
+    </button>
+    <button class="ml10" mat-raised-button style="background-color: #f4f4f4; color: #000000; margin-left: 10px;"
+      (click)="question=''">
+      重新填寫
+    </button>
+  </div>
+</div>

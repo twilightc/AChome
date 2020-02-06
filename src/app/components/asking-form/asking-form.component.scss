@@ -1,0 +1,24 @@
+:host {
+  width: 775px;
+  margin-top: 20px;
+}
+
+.asking-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.placeholder {
+  color: rgb(209, 16, 90);
+}
+
+.example-form {
+  background-color: #fff;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+  border-radius: 5px;
+}
