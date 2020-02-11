@@ -1,17 +1,17 @@
 <div class="card-body">
   <div class="image-container">
-    <ng-container *ngIf="!this.merchandiseInfo.ImagePath.includes('.jpg')">
-      <img src="https://placem.at/places?h=200&w=200" />
-    </ng-container>
-    <ng-container *ngIf="this.merchandiseInfo.ImagePath.includes('.jpg')">
+
+    <ng-container *ngIf="['jpg','gif','png'].includes(this.merchandiseInfo.ImagePath.split('.')[1].toLowerCase())" ;
+      else elsetemplate>
       <img class="product-image" [src]="merchandise.ImagePath" />
     </ng-container>
+    <ng-template #elsetemplate>
+      <img src="https://placem.at/places?h=200&w=200" />
+    </ng-template>
   </div>
   <div style="padding: 5px">
-    <a
-      [routerLink]="['/detail', { ItemId: merchandiseInfo.MerchandiseId }]"
-      style="color:#000000; text-decoration: none;"
-    >
+    <a [routerLink]="['/detail', { ItemId: merchandiseInfo.MerchandiseId }]"
+      style="color:#000000; text-decoration: none;">
       {{ merchandiseInfo.MerchandiseTitle }}
     </a>
   </div>

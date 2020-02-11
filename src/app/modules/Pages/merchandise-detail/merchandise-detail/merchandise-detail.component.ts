@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { MerchandiseViewModel } from 'src/app/models/CategoryListViewModel';
+import {
+  MerchandiseViewModel,
+  MerchandiseQaViewModel
+} from 'src/app/models/CategoryListViewModel';
 
 import { ShoppingCart } from 'src/app/models/ShoppingCartModel';
 import { ActivatedRoute } from '@angular/router';
@@ -23,6 +26,7 @@ export class MerchandiseDetailComponent implements OnInit {
   disableSpec = new Array<string[]>();
   CanCheckOuted = false;
   durationInSeconds = 3;
+  isAsking = false;
 
   constructor(
     private activateroute: ActivatedRoute,
@@ -32,6 +36,10 @@ export class MerchandiseDetailComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.getMerchandiseDetail();
+  }
+
+  getMerchandiseDetail() {
     this.activateroute.paramMap
       .pipe(switchMap(params => of([params.get('ItemId')])))
       .subscribe(data => {
@@ -112,5 +120,29 @@ export class MerchandiseDetailComponent implements OnInit {
     } else {
       console.log('請先登入');
     }
+  }
+
+  SendAskingForm(question: string) {
+    const qaForm = new MerchandiseQaViewModel();
+    qaForm.Question = question;
+    qaForm.MerchandiseId = this.merchandise.MerchandiseId;
+    this.isAsking = true;
+    this.merchandiseservice.PostAskingForm(qaForm).subscribe(async response => {
+      if (response.Success) {
+        await this.getMerchandiseDetail();
+
+        setTimeout(() => {
+          this.snackBar.openFromComponent(SnackbarScaffoldComponent, {
+            duration: 2000,
+            verticalPosition: 'top',
+            data: {
+              text: '問題已發佈',
+              textColor: '#32cd32'
+            }
+          });
+          this.isAsking = false;
+        }, 500);
+      }
+    });
   }
 }

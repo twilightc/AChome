@@ -45,6 +45,7 @@ export class MerchandiseSpecViewModel {
 }
 
 export class MerchandiseQaViewModel {
+  MerchandiseId: string;
   Seq: number;
   QuestionAccount: string;
   Question: string;

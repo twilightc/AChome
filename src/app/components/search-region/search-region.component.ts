@@ -30,6 +30,7 @@ export class SearchRegionComponent implements OnInit, OnDestroy {
   @Input() merchandiseList = new Array<MerchandiseViewModel>();
   @Output() RenewListBySearching = new EventEmitter<SearchEvent>();
   // @Output() Sort = new EventEmitter<number>();
+
   searchCommand = new BehaviorSubject<SearchEvent>(
     new SearchEvent(this.searchName, SortTypeEnum.None, OrderTypeEnum.None)
   );
